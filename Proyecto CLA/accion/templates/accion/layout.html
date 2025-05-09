@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Electricos & Soluciones</title>
+
+    <style>
+      .footer {
+        background-color: #001054;
+        color: white;
+        padding: 40px 30px;
+        font-size: 16px;
+      }
+
+      .footer .logo {
+        font-size: 60px;
+        font-weight: bold;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        padding: 0 15px;
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+
+      .footer .vertical-bar {
+        border-left: 3px solid white;
+        height: 100%;
+      }
+
+      .footer .small-text {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+
+    {% block content %}
+    {% endblock %}
+
+    <!--Barra de navegación-->
+
+    <nav style="background-color: #001152; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.4);">
+      <div class="container d-flex justify-content-between align-items-center">
+    
+        <!-- Logo -->
+        <div class="col-auto">
+          <a href="home.html">
+            <img src="https://i.postimg.cc/YCZg4n8g/LOGO-ELECTRICOS-removebg-preview.png" alt="Logo" width="80" height="70">
+          </a>
+        </div>
+    
+        <!-- Menú central -->
+        <div class="col d-flex justify-content-center">
+          <ul class="navbar-nav flex-row">
+    
+            <!-- Quienes Somos -->
+            <li class="nav-item px-4">
+              <a class="nav-link fw-bold" href="quienesSomos.html"
+                 style="color: white; font-size: 1.4rem; line-height: 1.2; transition: all 0.3s; border-bottom: 2px solid transparent;"
+                 onmouseover="this.style.color='#a3c4f3'; this.style.transform='translateY(-3px)'; this.style.borderBottom='2px solid #a3c4f3';"
+                 onmouseout="this.style.color='white'; this.style.transform='translateY(0)'; this.style.borderBottom='2px solid transparent';">
+                Quienes Somos
+              </a>
+            </li>
+    
+            <!-- Categorías -->
+            <li class="nav-item dropdown px-4" style="position: relative;">
+              <a class="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                 style="color: white; font-size: 1.4rem; line-height: 1.2; transition: all 0.3s; border-bottom: 2px solid transparent;"
+                 onmouseover="this.style.color='#a3c4f3'; this.style.transform='translateY(-3px)'; this.style.borderBottom='2px solid #a3c4f3';"
+                 onmouseout="this.style.color='white'; this.style.transform='translateY(0)'; this.style.borderBottom='2px solid transparent';">
+                Categorías
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown"
+                   style="background-color: white; border: none; border-radius: 10px; padding: 10px; left: 50%; transform: translateX(-50%); position: absolute;  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);">
+                <a class="dropdown-item fw-bold" href="#" style="color: #001152; font-size: 1.2rem; border-radius: 8px; padding: 8px 16px; transition: all 0.3s;"
+                   onmouseover="this.style.backgroundColor='#FFD700'; this.style.color='black';"
+                   onmouseout="this.style.backgroundColor=''; this.style.color='#001152';">
+                  Subcategoría 1
+                </a>
+                <a class="dropdown-item fw-bold" href="#" style="color: #001152; font-size: 1.2rem; border-radius: 8px; padding: 8px 16px; transition: all 0.3s;"
+                   onmouseover="this.style.backgroundColor='#FFD700'; this.style.color='black';"
+                   onmouseout="this.style.backgroundColor=''; this.style.color='#001152';">
+                  Subcategoría 2
+                </a>
+              </div>
+            </li>
+            
+            
+                    
+    
+            <!-- Novedades -->
+            <li class="nav-item px-4">
+              <a class="nav-link fw-bold" href="novedades.html"
+                 style="color: white; font-size: 1.4rem; line-height: 1.2; transition: all 0.3s; border-bottom: 2px solid transparent;"
+                 onmouseover="this.style.color='#a3c4f3'; this.style.transform='translateY(-3px)'; this.style.borderBottom='2px solid #a3c4f3';"
+                 onmouseout="this.style.color='white'; this.style.transform='translateY(0)'; this.style.borderBottom='2px solid transparent';">
+                Novedades
+              </a>
+            </li>
+    
+            <!-- Contacto -->
+            <li class="nav-item px-4">
+              <a class="nav-link fw-bold" href="contacto.html"
+                 style="color: white; font-size: 1.4rem; line-height: 1.2; transition: all 0.3s; border-bottom: 2px solid transparent;"
+                 onmouseover="this.style.color='#a3c4f3'; this.style.transform='translateY(-3px)'; this.style.borderBottom='2px solid #a3c4f3';"
+                 onmouseout="this.style.color='white'; this.style.transform='translateY(0)'; this.style.borderBottom='2px solid transparent';">
+                Contacto
+              </a>
+            </li>
+    
+            <!-- Ícono carrito -->
+            <li class="nav-item px-4">
+              <a class="nav-link fw-bold" href="carrito.html"
+                 style="color: white; font-size: 1.4rem; line-height: 1.2; transition: all 0.3s;">
+                <img src="https://cdn-icons-png.flaticon.com/512/8146/8146003.png" alt="Carrito" style="width: 40px; height: 40px; object-fit: cover;">
+              </a>
+            </li>
+    
+          </ul>
+        </div>
+    
+        <!-- Ícono de usuario -->
+        <div class="col-auto">
+          <a href="inicioSesion.html" class="d-inline-block rounded-circle border border-white overflow-hidden"
+             style="width: 60px; height: 60px;">
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p3/7407996-user-icon-person-icon-client-symbol-login-head-sign-icon-design-vetor.jpg"
+                 alt="Usuario" style="width: 100%; height: 100%; object-fit: cover;">
+          </a>
+        </div>
+    
+      </div>
+    </nav>
+    
+    <!-- Sección de bienvenida -->
+    <section class="hero-section text-center text-white d-flex align-items-center justify-content-center" 
+             style="background-image: url('https://cdn.pixabay.com/photo/2022/01/10/15/29/wind-mills-6928590_1280.jpg'); 
+                    background-size: cover; 
+                    background-position: center; 
+                    height: 500px; 
+                    position: relative;
+                    margin-top: 50px;">
+      <div style="background-color: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
+      <div class="container position-relative" style="z-index: 2;">
+        <h1 class="fw-bold display-5" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">Les brindamos variedad y soluciones eléctricas a todos sus proyectos</h1>
+      </div>
+    </section>
+
+    <!-- Carrusel -->
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Productos Eléctricos</h2>
+    
+      <div id="carouselProductos" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="false">
+        <div class="carousel-inner">
+    
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-md-6 producto">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzDMjySeQGpaw0c6n8SPfEgibYEfUVwN-dDg&s" alt="Bombillo LED">
+                <h6>Bombillo LED 12W</h6>
+                <p>Luz blanca 6500K, casquillo E27, ahorro de energía.</p>
+                <span class="precio-actual">$10.000</span>
+                <span class="precio-anterior">$15.000</span>
+                <div class="etiqueta-oferta">¡OFERTA!</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 12 unidades</p>
+              </div>
+              <div class="col-md-6 producto">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEOMzLVPLp-hfNLz2b5ZyEnnrNACVfpwMh6w&s" alt="Tomacorriente doble">
+                <h6>Tomacorriente Doble</h6>
+                <p>Con tierra, ideal para oficinas y cocinas.</p>
+                <div class="etiqueta-precio">$10.000</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 18 unidades</p>
+                <div class="etiqueta-nuevo animada">NUEVO</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,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" alt="Cable coaxial">
+                <h6>Cable Coaxial RG6</h6>
+                <p>100 metros, doble blindaje para CCTV o TV.</p>
+                <div class="etiqueta-precio">$10.000</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 22 unidades</p>
+                <div class="etiqueta-nuevo animada">NUEVO</div>
+              </div>
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,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" alt="Interruptor">
+                <h6>Interruptor Sencillo</h6>
+                <p>Blanco, 10A, empotrable, uso doméstico.</p>
+                <span class="precio-actual">$10.000</span>
+                <span class="precio-anterior">$15.000</span>
+                <div class="etiqueta-oferta">¡OFERTA!</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 16 unidades</p>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,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" alt="Tubo LED">
+                <h6>Tubo LED T8 18W</h6>
+                <p>120cm, encendido inmediato, luz fría.</p>
+                <span class="precio-actual">$10.000</span>
+                <span class="precio-anterior">$15.000</span>
+                <div class="etiqueta-oferta">¡OFERTA!</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 14 unidades</p>
+              </div>
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,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" alt="Regleta">
+                <h6>Regleta Multitoma</h6>
+                <p>6 salidas, protección contra sobrecargas.</p>
+                <div class="etiqueta-precio">$10.000</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 8 unidades</p>
+                <div class="etiqueta-nuevo animada">NUEVO</div>
+              
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,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9GHtzZSxM5lzb/AXVM0Tng94GB27VJPrdWroBvpyestz81SwNadbumssDnrAoLIN1XXDdZ17Abr8V9I9ilE9lA57wR3krntHINawkcrtd6Lk/Z32dVGIyCeYPhpL3LjcOlA+rHyO92zhcr6TpadsbGxxtDWNAa1o2BoFgAg9bIiICiylEGt6TaFUlaCZYw15+u0C5P2gcn+efMLkuknZpW05LoIqaaL3mxEvHVgN/S/Vd+UKD5YpsTfTSC88bHMPssicCOIyOXmF0XAO0OKXwTskaffDH6p5kEZHpddPxXR+lqP38Mbj71rP/iFj8VpWN9kcMpvBV1UP2bgt+FnfEqRWbw7FmPH0b2SN+yRcfl5rJx1TTv8AXI/zXLp+zCupvHR93K7j38jHdfELX81TRS49Af7VECwbu6fJl/3Gn53VR1oO9VIcuURdppa/ujR1JO8tBYB5SWz6rYD2hUrGh8z3xj7bRt4eAm56JRvF0K1bD9N6OYa0c8bhsv4mgcswrxulNLran7RBrcO9jv6XVGaczgo1TxVmzFIzsc23G7c/ivQVjfy5qi4tzQtH9Vamub/LgqH4iwbx1uPzQXospJWIkxyEXJkiHV7PjmsRV6d0LDquqqcOvmNbWPSzRkiNrLv1/RU63D9ei0iv7QqZgLrzO5MiJPxWAPanDJ4YmOc7cJX6pv8AdAN0pHT5apoyv5DM+fBYzEMQsCXlsbOJIHmSuVyaVYtM60VK4t/6ZrnHzLgT8lU7QHGKt3eEVLCf+IkYAOWrcu+CVWVx/tCgjJjp3sc7e53sg8gdp65dVzbFcTlncXSd1Jc6x8ZJJ4nKy6nhXYrM637dWMtvbDGCfJ78h/AVu2B9mOF0xDm0zJHjPXm+kNxvDT4QejQoPn3R3RCqrj/ZqNxb/vLkRDq82B6C55LsuhvZDT0+rJWltRIMwzPuGH7pzlPN2X2QumNaALAAAbAFUghrQMhkFKIgIiICIiAiIgIiICIiCiSJrsnAEcwD81iq7Rahm/fUdK/70TD8bLMIg1x2g2H2sKZrQMgGOkaAOQDrBYs9lOF6/eiGQPuTfvZHZnfZ5Iut3RBouIdldDMwsc6pAJBye3cb72Lww/slooWlsctUATrHxR7bW9zkugog5rWdjFDI/vHT1YdlsMX1dhzjyV7L2VUb2lr5alzSLEEx/wCRb6iDnuGdj+HQkljqo3FiDILfBozV7N2WYW+xlgdJbZrSSf8AyQt1RBrdLoJh0YAZSR2GwOL3f+xKytHg1NF+5p4Gc2RsB9QFfoggBSiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiD//2Q==" alt="Campana LED">
+                <h6>Campana Industrial LED</h6>
+                <p>100W, ideal para bodegas y talleres.</p>
+                <div class="etiqueta-precio">$10.000</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 13 unidades</p>
+                <div class="etiqueta-nuevo animada">NUEVO</div>
+              </div>
+              <div class="col-md-6 producto">
+                <img src="data:image/webp;base64,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" alt="Timbre">
+                <h6>Timbre Inalámbrico</h6>
+                <p>Control remoto, múltiples tonos, 100m alcance.</p>
+                <span class="precio-actual">$10.000</span>
+                <span class="precio-anterior">$15.000</span>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 18 unidades</p>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Slide 3 -->
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASEhIQEBIWEBUSFRIWEhEVExIRFxUXFRYWGBUVFRgYHSggGBolGxUVITEhJSorLi4wFx8zODMtNygtLisBCgoKDg0OGhAQFysdHx0rLS0tLS0rNystLSstLTItLS4tLSstKzc3NystNy4tLS0uNys3LTc1LS0tLS03LS0tN//AABEIAOEA4QMBIgACEQEDEQH/xAAbAAEAAQUBAAAAAAAAAAAAAAAABgEDBAUHAv/EAEAQAAIBAgMFBQQIAwcFAAAAAAABAgMRBBIhBQYxQVETImFxgUKRocEHFDJSYnKx0SPh8CQzU2OCwvFDkqKys//EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/8QAIREBAQEBAQABAwUAAAAAAAAAAAERAgMhQcHhBBIiMVH/2gAMAwEAAhEDEQA/AO4gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMXaG0KVCOepK3RcXLwS5kG21vHVr3jG9On91PWX5n8uHmB0KMk+DuVOTU8VWzZs+RK2XIuztprfK9fU2uG3lxUP+pnXSaT+Ks/iSUdEBEsJvlyqUvNwl8n+5tcNvLhZ8Zum+k018VdfEo3ALdGvCavCUZrrFqX6FwAAAAAAAAAAAAAAAAAAAAAAAAAAY2Ox1OjHPVkorl1b6Jc2BkkV29vPlbpYd6rSVXil4Q6+Zr94NvVptU0uyjLhFNOcvzW4eX6kUx+0o080IJVaseMMySi/x63b/CtetiaM+rUcu9Vm+fek5Sbtd2XFt+CLFOpF8JJ35Xs/c9SI4mtVqzz1MylH7ytGK6RWmVeCRk4Ouou9anKq4vuOM8yi1+Get725+hDEplHlwfieckujfoXNl7TjXheUO8l/ESTmo8ct3aN27dWVxtWlHKlGUp1P7unBXlNrjo0klfnql1IYx3VWbLbXmuni+hebLsME20otOTV3HV2/1LR+YrYWpH7UWvHiveiypizGbTum01wadmbOnvFWo03N1pSeZRUHFVOPC7etvLkjVnpPS3J8UKJNhN8qlv4tKMvytx/W9za4bevCy+05U/zR098bkDZ5ZdHVMPjKVT+7nGf5ZJ/oXzkM01rqvHh8TNwu3sVT+zWk10l31/5XGq6iCD4PfaqtKtOM/GLcH7ndG5wu92Fl9rNTf4o3Xvjco34MfDY6lU1p1Iz8pJ/AyAAAAAAAAAAAAAxsfjqdGOeo7LkubfRIhG19vVazsm6cOUItq/5muPlw/UmiRba3khSvClapPh+GPm+b8EQrF4upVlnqScpdenguiLYsTRZVCKm6q0k0k2m1wVlboWq+ApT1lCLfW2vq1Zv1Zl2FiYNVU2R/h1JRX3ZWnH3aW9zMKvs+qlrTz9HSlr6xaba8ookLPLBqJbNoYmpK0ZfV1F2nWWeCVtbL2nL8K18joWxcFTjmcP4lSdu1rVZKVSfS8Vwj+HQ19PE1I6Rm0un2l/2u6PX1mL0lSjxvenam+H3XeMn7jl7c+nXOefX7b/ua3z1zL8zWV9WqTnko2jT4VKsH2buuUE4v/cvFGx2RKKpyqaJTk5X0XcSUYSfnGMZerNTPFNRlkrys1bJOL7RZtO6+8m14WS5litiHJKP2YRSUaa4JLhfq/wCvE836Xx9ue7169b9J99/Dp6d8WScxf2nio1HaCSV9ZZUpS8uaXxf64gKHvcFTzK3Bq6KnmQR5SjbW6euqs+PPXmWYp8+vIus8MCsUZFCpKLvFpOzWqv5GNFmr2rtpQvCnrLnLio/uyVV3HY90Y5XLtKr1cuFn952OpbiVqk8DQlVzOTUtZXvJZ5ZZa8mrHOvoy2PRxWIqTxC7TsoxmoPWMpN8Z9bW4HZEi8gADQAAAAABq9p7ahSbhFqVSzdnJJR8ZP5cS9ttVOxn2TcZdVxtzt42Od4jCZk07TT4ppO/o9GS0XMZtKVeTlOee3C32Ur+z4aGOeaVBQWVKyPaMgkCtygQPLK3KAeWCoAoAUAqUBRgLi5QoB6uUbPLY7dQTk6bq2TtFNR4K/F+XxFqxSRbkzFo4tyTqzSpJ3eT7q8+ZodrbXdTuQ0j8ZfyGjJ2pti96dJ+Dmv0X7mliikUekQdC+huX9oxC/yo/Cf8/idZOR/Q6/7VWX+T/vh+51w3P6AAFAAAAAAI3vHslv8AjU0rKLzxVlwu83j4+RJCjV9GBzZs8ukn4GZtPC9lUnDkn3fJ6r4GITEWZUHy1LbMy4bT4omDChFtpLVt2RXFw7OShJpy5pO7Xn0MjsFxi7Mt4qi5TlVyq8uLTb5Jc9eSJlX4WCjDKMIqeWVPIFSjBQAUBRgGzGxWLhCLcnZFvaGOjSjeXHkubItWq1K8rv8AlFEHraO0ZVXbhFcI/NmHGJnxwiR5lRCsU9JF9UD2qAEz+iB/2uqv8iX/ANKZ105J9E8LYyp40J/+9M62bgAAoAAAAAAAAjm9+EvGNVcY92Xk+Hx/U5pjtkY1t1aWKbnx7PLen+VR428eJ2jGYdVISg/aTXl0fvOVbS2fUVVTi3FxbjJJtWd0tfdb3EqNbsDeLPJ0K8eyrx4wvdSX3oN8V4ciRXIh9IOyJ9nHF0+5VpNSzLk/veT4NeKLuzdoYrG4anLCtUXJPtKj72WSdnCK56pu/S3UCVWK5mQqrtTH4CSWNXb0nb+NBLMl1aWjXl776ErwGOp1oRqU5KcZK6ktUwMqSi+Kv/XUtSwl/sv3/uXGiidhgxKlGS4r14lo2KnY8ypwlxXu0ZMGvPcaMmnJRbS4uxeqYP7r9HoW9o55UVSTdNxnF3jZXSvpdK+t9deRm7FmLEaiauncwNp7SjSXWT4R+b8DG2htFUVkh3pvy0vzdjUUqDk803mb4hHjs51ZZ5vj/Vl4GbTpqKskIr5nplxRo8uB6RVlR5UD0oFYl6jSlJqMU5Sk7RildtvkkBKvowpP61OSWioyu/OULfo/cdQI/ubsD6pSee3a1LOpbXLb7ML87Xfq2SA1FAAAAAAAAAAAIhvNhuzq9ouFRa9LrSS9VYl5ibUwEa9N05ac4y6NcGBzba+V0KsLOV6c0oLVttWSXrYj25ezK2HwlSlJ5ak5yqRS1ypqKa0591v1JTj8JKlN0ptZlw10afB/8mHllHW1n1DOvGCw1WtSlTxHfi07Sa1/nzIHs7ET2bjnhpf3NaWi1tCcmlGS8Hov+DqOH2n3VCSt4qyOd/SjhO1nh40lmqyU1Zau3Jv1ZmKkONxGPn3qEIRgr5cz70re1ZcF7jD2bvTeao4mPY1NLN/Zd+GvL4rxNjtLE1o9nksk0rqyevNfoYW8myPrVDNKKjVirrxtx8y/USKE0ypBdx94XLNh68u9STcZP2oLR3fWPXmmmZWJ3hx8/wCJhsI3S9lyspTXVXkv0YRMblVMiuxN76dWXY1ovD1eHZz0u/wt29zSfS5JoyT4FEIqUEqlT88uPnoXUZO2KWWrO3tWl71+6NVVxE1wSZi2RrNZaKmjxm8cKVs8X0drX9EbPB4yNSKnFSSa0zRlC/irrVeK00KMpFTwmXaNOUpKMU5Sk0oxSu23wSRUVo0pSkoxTlKTSjFK7bfBI6vufuvHCx7WraVaS1fFU0/Zj49X8uPnc7dWOFj2tW0q8l5qmn7MfHq/TzlAUABQAAAAAAAAAAA0O922JYaleNo5lNub1yqKTdlzepvjC2rsuhiYdnXhnj5uLXLSUWmtOjA5DgMZLEKdZxmo5mlUlfvStd3fBvwuequ2eyag2pt2tF/PoT7b27H8OlTwlOMYUoyiqd7WT1vFvne7d3qYm5m46oS+s4q1StduEb5o0/G/tT8eXLqTExo6uz69u0dGpCD1u4tWXj09RGCOpGtx2w6FW7cckn7Ue6/Xk/U0mIEoLS6vYv1ZQa0unyX9aG3x27daGtO1VeHdl7nx9DTVKbTaknFrimmmTNHLq+zrbWtTjePaRzpcMtSMu1T8LNfAnu0toypSUYwzKy8L+CMmlgKcG5QhGLk7uSWrfVvme54eMms3Ln8hhqOby7Bhi6PaRhkqRTatxT52t+nO3Jmt3G3hnNywmId6tNaS/wASC5+auvP3nSOxpqLV1otGranIN6MI8PtTDzpcak4OyXKUss15ay95IqZ7wU9YS6q3zNFUwWdu0lTUVepUlpGEecpfJc37yTbahenf7rRG8VhqlaHYQ+/mytWgrKOapV+8krWT5x5ixYiiwP8AbY069N1Ivuwadlnd7Wd7Xu07P7qXM6HDYlG1Sphp9mr04ZJK7bqKF/tvuq8rX5ZZGmjQWeWuazaUrWv42MumpycYRvJ3tCKu3dvgl1vY8/t4Xuyy46+frOZli7idnVITjTtmlK2WMe83fgkl15dTpu5m6iwyVaslKvJeapp+zHrLq/Raca7n7sfV0q+I79eS5vN2afsp/e6v0XjKTvxLJ/L5rnc34AAaQAAAAAAAAAAAAAAAAAAAAACxisHTqK1SCl58V5Pii+AI1jt1udGf+ifykvmR/F4KrSdqkHHo+T8nwOikL3s3nXew9Bp8VUqaNeMY/Nl1LGlnJrkairsinKusTJZ6iSUW3dRS5RXBefEy6GLnFJ/ai+T1Xoy7LF0rXd6bbSSeqbfBJjWVvFwvTkuqZG4VZKLinpKza62/5JMnd2fIjyw8nPJFOTcrRildtt6JIVYs0KUpNKKcpSaSildtvgkubOqbm7qRwyVaslKtJeapp+zHrLq/ReNdzt1Y4ZKtWSlWa81TT5L8XV+i8ZSRQABQAAAAAAAAAAAAAAAAAAAAAAAAAAeakMycXzTXvOe7R3ErVq1OF1Sopt1JxesrPTLHr8F4nRABzPb+Fp0ZdlShKMKXdcpScnJ9X0Mfd3dt42qqtS8aFN68nOS9lfN+i43XQNpbBoV23PMr/ayu1/P+Rn4bDwpxjTpxUYxVoxXBIJjXYjdzCyVlTVNrhKHdf7P1LeyN2cPh6kq0bzm+Ep2eXrlSWl+pugFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=" alt="Caja de empalme">
+                <h6>Caja de Empalme</h6>
+                <p>Plástica 10x10 cm, para uniones eléctricas.</p>
+                <div class="etiqueta-precio">$10.000</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 12 unidades</p>
+                <div class="etiqueta-nuevo animada">NUEVO</div>
+              
+              </div>
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,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" alt="Canaleta">
+                <h6>Canaleta Plástica</h6>
+                <p>2 metros, adhesiva, organiza cables fácilmente.</p>
+                <span class="precio-actual">$10.000</span>
+                <span class="precio-anterior">$15.000</span>
+                <div class="etiqueta-oferta">¡OFERTA!</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 19 unidades</p>
+              </div>
+            </div>
+            <div class="row">
+              <!-- Puedes añadir más productos aquí si tienes -->
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,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" alt="Tomacorriente múltiple">
+                <h6>Tomacorriente Triple</h6>
+                <p>Con interruptor y protección, diseño compacto.</p>
+                <span class="precio-actual">$10.000</span>
+                <span class="precio-anterior">$15.000</span>
+                <div class="etiqueta-oferta">¡OFERTA!</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 10 unidades</p>
+              </div>
+              <div class="col-md-6 producto">
+                <img src="data:image/jpeg;base64,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" alt="Interruptor doble">
+                <h6>Interruptor Doble LED</h6>
+                <p>Con indicador, empotrable, uso residencial.</p>
+                <div class="etiqueta-precio">$10.000</div>
+                <span class="text-warning">★★★★★</span>
+                <p class="text-success mb-1">Stock: 22 unidades</p>
+                <div class="etiqueta-nuevo animada">NUEVO</div>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+    
+         <!-- Controles -->
+         <a class="carousel-control-prev" href="#carouselProductos" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselProductos" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Siguiente</span>
+        </a>
+      </div>
+    </div>
+    <style>
+          .producto {
+          text-align: center;
+          padding: 10px;
+        }
+        .producto img {
+          width: 100%;
+          height: 160px;
+          object-fit: cover;
+          border-radius: 6px;
+        }
+        .producto h6 {
+          margin-top: 10px;
+          font-weight: bold;
+        }
+        .producto p {
+          font-size: 0.9rem;
+          color: #555;
+        }
+      .producto img {
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+        background-color: #f8f9fa;
+        padding: 5px;
+        border-radius: 6px;
+      }
+    
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        background-size: 100% 100%;
+      }
+    
+      .carousel-control-prev-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.5 0l-3.5 4 3.5 4v-8z'/%3E%3C/svg%3E");
+      }
+    
+      .carousel-control-next-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.5 0l3.5 4-3.5 4v-8z'/%3E%3C/svg%3E");
+      }
+      .imagen-con-precio {
+      position: relative;
+    }
+    
+    .imagen-con-precio img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      background-color: #f8f9fa;
+      padding: 5px;
+      border-radius: 6px;
+    }
+    
+    
+    
+    .etiqueta-oferta {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: crimson;
+      color: white;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+    @keyframes parpadeo {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+    
+    .etiqueta-nuevo {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background-color: #28a745;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+    
+    .etiqueta-nuevo.animada {
+      animation: parpadeo 1.5s infinite;
+    }
+    .producto:hover {
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .franja-precio.oferta {
+      background-color: #000;
+      color: #ffc107;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 8px 0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      border-radius: 0 0 6px 6px;
+    }
+    
+    .precio-actual {
+      color: #28a745; /* verde para destacar el precio nuevo */
+      margin-right: 10px;
+    }
+    
+    .precio-anterior {
+      color: #ccc;
+      text-decoration: line-through;
+      font-size: 0.9rem;
+    }
+    </style>
+    
+    <!-- JS de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Sección de Envíos -->
+<section class="py-5" style="background-color: #f8f9fa;">
+  <div class="container-fluid p-0">
+    <div class="row g-0 align-items-center" style="position: relative; height: 320px; background-image: url('https://img.freepik.com/vector-premium/paquetes-entrega-mensajeria-lindo-dibujos-animados-carro-camion_338371-95.jpg?w=740'); background-size: cover; background-position: center;">
+      
+      <!-- Capa oscura para mejorar contraste -->
+      <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+
+      <div class="col-md-6 position-relative text-white px-5 py-4 text-center text-md-start">
+        <h2 class="display-5 fw-bold mb-3" style="text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);">
+          Envíos disponibles <br>
+          para todo el departamento <br>
+          del Tolima
+        </h2>
+        <a href="contacto.html" class="btn btn-warning btn-lg shadow" style="font-weight: 600;">
+          Solicitar envío
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pie de página -->
+
+<footer style="background-color: #001152; color: white; padding: 30px 0;">
+  <div class="container text-center">
+    <!-- Logo y descripción -->
+    <div class="mb-4" >
+      <h4 class="fw-bold mb-2">E&amp;S</h4>
+      <p class="mb-0 small">
+        Amplio catálogo en productos eléctricos y<br>
+        distribuidores desde hace más de 5 años.
+      </p>
+    </div>
+    <div class="container text-center">
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <h5 class="mb-2">Contáctanos</h5>
+          <p class="mb-1"><strong>Teléfono:</strong><br>+57 315 651 76 89</p>
+          <p class="mb-1"><strong>Email:</strong><br>edingaitan@hotmail.com</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-2">Enlaces Rápidos</h5>
+          <p class="mb-1"><a href="catalogo.html" class="text-white">Catálogo</a></p>
+          <p class="mb-1"><a href="quienesSomos.html" class="text-white">Quiénes Somos</a></p>
+          <p class="mb-1"><a href="novedades.html" class="text-white">Novedades</a></p>
+          <p class="mb-1"><a href="contacto.html" class="text-white">Contacto</a></p>
+          <p class="mb-1"><a href="carrito.html" class="text-white">Carrito</a></p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-2">Legal</h5>
+          <p class="mb-1"><a href="#" class="text-white">Términos y Condiciones</a></p>
+          <p class="mb-1"><a href="#" class="text-white">Política de Privacidad</a></p>
+        </div>
+      </div>
+    </div>
+    
+    
+
+    <!-- Línea inferior -->
+    <div class="mt-3 border-top pt-2 small">
+      &copy; 2025 E&amp;S. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

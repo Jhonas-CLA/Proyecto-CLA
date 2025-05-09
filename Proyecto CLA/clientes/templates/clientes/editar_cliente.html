@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editar Cliente</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #f2f4f8;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 12, 76, 0.25);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .form-title {
+      color: #000C4C;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100% !important;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .btn-custom,
+    .btn-cancel {
+      width: 48%;
+      padding: 10px 0;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .btn-custom {
+      background-color: #000C4C;
+      color: white;
+      border: none;
+    }
+
+    .btn-custom:hover {
+      background-color: #001465;
+    }
+
+    .btn-cancel {
+      background-color: #e0e0e0;
+      color: #000C4C;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-cancel:hover {
+      background-color: #000C4C;
+      color: white;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2 class="form-title">Editar Cliente</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="btn-group text-center mt-4">
+      <button type="submit" class="btn btn-custom">Guardar</button>
+      <a href="{% url 'listar_clientes' %}" class="btn btn-cancel">Cancelar</a>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
+
+

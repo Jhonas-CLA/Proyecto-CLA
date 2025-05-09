@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f2f4f8;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 12, 76, 0.25);
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        h2 {
+            color: #000C4C;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .btn-custom {
+            background-color: #000C4C;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #001465;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 15px;
+        }
+
+        .table {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 12, 76, 0.1);
+            margin: 0 auto;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+        }
+
+        .table th, .table td {
+            width: 16.66%; /* Distribuir las columnas de forma equitativa */
+        }
+
+        .add-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Listado de Clientes</h2>
+    <table class="table table-bordered" style="margin-bottom: 50px;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Completo</th>
+                <th>Gmail</th>
+                <th>Teléfono</th>
+                <th>Dependencia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nombre_completo }}</td>
+                    <td>{{ cliente.gmail }}</td>
+                    <td>{{ cliente.telefono }}</td>
+                    <td>{{ cliente.dependencia }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="{% url 'editar_cliente' cliente.id %}" class="btn btn-custom btn-sm">Editar</a>
+                            <a href="{% url 'eliminar_cliente' cliente.id %}" class="btn btn-custom btn-sm">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'agregar_cliente' %}" class="btn btn-custom add-btn">Agregar Cliente</a>
+</div>
+
+</body>
+</html>
