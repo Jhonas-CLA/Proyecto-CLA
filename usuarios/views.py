@@ -1,78 +1,44 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout
-from .forms import LoginForm
+from .models import Usuario
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+from .forms import UsuarioForm
 from django.contrib import messages
-from usuarios.forms import CustomUserCreationForm  
 
-def registro_view(request):
+
+# ******** CONTROL DE INGRESO DE USUARIOS ***********************************************************
+def login(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('/home/')  # O cambia por una vista que tengas
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = auth.authenticate(request, email=email, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('home.html')  # mejor usar redirect a la url con nombre 'home'
+        else:
+            return render(request, 'usuarios/login.html', {'alarma': 'Correo o contraseña no válida!'})
     else:
-        form = CustomUserCreationForm()
-    return render(request, 'accion/registro.html', {'form': form})
+        return render(request, 'usuarios/login.html')
 
 
-def registro(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, 'Registro exitoso.')
-            return redirect('home')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'accion/registro.html', {'form': form})
-
-
-def iniciar_sesion(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            usuario = form.get_user()
-            login(request, usuario)
-            messages.success(request, f'Bienvenido {usuario.username}')
-            return redirect('home')  
-    else:
-        form = AuthenticationForm()
-    return render(request, 'usuarios/login.html', {'form': form})
-
-def cerrar_sesion(request):
-    logout(request)
-    messages.info(request, 'Sesión cerrada correctamente.')
+# ********* CIERRE DE SESIÓN DEL USUARIO **********************************************************
+@login_required(login_url='login')
+def logout(request):
+    auth.logout(request)
     return redirect('login')
 
-def login_view(request):
+
+# ********* REGISTRO DE NUEVO USUARIO *************************************************************
+def registrar(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
+        form = UsuarioForm(request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('/')  
+            form.save()
+            messages.success(request, '¡Registro exitoso! Ahora puedes iniciar sesión.')
+            return redirect('registro')
+        else:
+            messages.error(request, 'Por favor revisa los campos y vuelve a intentarlo')
     else:
-        form = AuthenticationForm()
-    return render(request, 'accion/inicioSesion.html', {'form': form})
-
-
-def login_view(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            usuario = form.cleaned_data['usuario']
-            contrasena = form.cleaned_data['contrasena']
-            user = authenticate(request, username=usuario, password=contrasena)
-            if user is not None:
-                login(request, user)
-                return redirect('home')  # Cambia por la vista que desees
-            else:
-                form.add_error(None, 'Usuario o contraseña incorrectos')
-    else:
-        form = LoginForm()
-
-    return render(request, 'usuarios/login.html', {'form': form})
+        form = UsuarioForm()
+    return render(request, 'accion/registro.html', {'form': form})

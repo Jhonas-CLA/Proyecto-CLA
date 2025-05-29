@@ -1,59 +1,45 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from .models import Usuario
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-class CustomUserCreationForm(UserCreationForm):
-    nombre_completo = forms.CharField(
-        max_length=100,
-        required=True,
-        label="Nombre Completo",
-        widget=forms.TextInput(attrs={
-            'class': 'form-control form-control-lg',
-            'placeholder': 'Ingresa tu nombre completo'
-        })
-    )
-    email = forms.EmailField(
-        required=True,
-        label="Correo Electrónico",
-        widget=forms.EmailInput(attrs={
-            'class': 'form-control form-control-lg',
-            'placeholder': 'Ingresa tu email'
-        })
-    )
-
-    username = forms.CharField(
-        required=True,
-        label="Nombre de Usuario",
-    )
-
-    password1 = forms.CharField(
-        required=True,
-        label="Contraseña",
-    )
-
-    password2 = forms.CharField(
-        required=True,
-        label="Confirma la contraseña",
-    )
+class UsuarioForm(forms.ModelForm):
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput)
 
     class Meta:
-        model = User
-        fields = ['username', 'nombre_completo', 'email', 'password1', 'password2']
+        model = Usuario
+        fields = ['nombre_completo', 'username', 'email']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control form-control-lg'
+    def clean_nombre_completo(self):
+        nombre = self.cleaned_data.get("nombre_completo", "").strip()
+        if len(nombre.split(' ')) < 2:
+            raise forms.ValidationError("Debes ingresar nombre y apellido completos.")
+        return nombre
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if Usuario.objects.filter(email=email).exists():
+            raise forms.ValidationError('Este correo ya está registrado.')
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if Usuario.objects.filter(username=username).exists():
+            raise forms.ValidationError('Este nombre de usuario ya está en uso.')
+        return username
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+
+        if password1 and password2 and password1 != password2:
+            self.add_error('password2', "Las contraseñas no coinciden.")
+        return cleaned_data
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.email = self.cleaned_data['email']
-        user.first_name = self.cleaned_data['nombre_completo']
+        user.set_password(self.cleaned_data['password1'])
         if commit:
             user.save()
         return user
-
-
-class LoginForm(forms.Form):
-    usuario = forms.CharField(label='Usuario', max_length=100)
-    contrasena = forms.CharField(label='Contraseña', widget=forms.PasswordInput)

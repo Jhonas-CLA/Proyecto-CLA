@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css"> 
     
     <style>
+      
       .footer {
         background-color: #001054;
         color: white;
@@ -52,6 +53,22 @@
         text-align: center;
       }
     </style>
+    <style>
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  @media (max-width: 576px) {
+    .card-img-top {
+      height: 150px;
+    }
+  }
+</style>
+
   </head>
   <body>
 
@@ -167,7 +184,7 @@
 
     <div class="d-none d-md-block">
       <a
-        href="{% url 'inicioSesion' %}"
+        href="{% url 'login' %}"
         class="d-inline-block rounded-circle border border-white overflow-hidden"
         style="width: 60px; height: 60px;"
       >

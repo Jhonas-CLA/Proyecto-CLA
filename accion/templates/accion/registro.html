@@ -233,7 +233,7 @@
 
     <div class="d-none d-md-block">
       <a
-        href="{% url 'inicioSesion' %}"
+        href="{% url 'login' %}"
         class="d-inline-block rounded-circle border border-white overflow-hidden"
         style="width: 60px; height: 60px;"
       >
@@ -249,64 +249,140 @@
 
     <!-- Formulario Registro -->
 
-<div class="container py-5">
-  <div class="login-container bg-white rounded shadow-sm p-5 mx-auto">
-    <h3 class="text-center mb-5 font-weight-bold text-primary" style="font-size: 3rem;">Crear Cuenta</h3>
-
-<form method="post" novalidate>
-  {% csrf_token %}
-  {{ form.non_field_errors }}
-  <div class="form-group">
-    {{ form.nombre_completo.label_tag }}
-    {{ form.nombre_completo }}
-  </div>
-  <div class="form-group">
-    {{ form.email.label_tag }}
-    {{ form.email }}
-  </div>
-  <div class="form-group">
-    {{ form.username.label_tag }}
-    {{ form.username }}
-  </div>
-  <div class="form-group">
-    {{ form.password1.label_tag }}
-    {{ form.password1 }}
-  </div>
-  <div class="form-group">
-    {{ form.password2.label_tag }}
-    {{ form.password2 }}
-  </div>
-  <button type="submit" class="btn login-btn btn-block btn-lg mt-3">Registrarme</button>
-</form>
+ <style>
 
 
-    <p class="mt-4 text-center">
-      ¿Ya tienes cuenta?  
-      <a href="{% url 'inicioSesion' %}" class="register-link">Inicia sesión aquí</a>
-    </p>
-  </div>
-</div>
+    h1{
+      text-align: center;
+      margin-bottom: 10%;
+    }
+    .register-container {
+      width: 320px;
+      padding: 20px;
+      margin-left: 40%;
+      margin-top: 4%;
+      margin-bottom: 4%;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
-<style>
-  .login-container {
-    max-width: 500px;
-  }
-  .login-btn {
-    background-color: #0d1b72;
-    color: white;
-  }
-  .login-btn:hover {
-    background-color: #0a155a;
-  }
-  .register-link {
-    color: #0d1b72;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .register-link:hover {
-    text-decoration: underline;
-  }
-</style>
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #999;
+    }
+
+    .show-password {
+      font-size: 12px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #0d1e78;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0a155b;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .login-link a {
+      text-decoration: none;
+      color: #0d6efd;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+<body>
+  <div class="register-container container-py5">
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li style="color: green;">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+    <h1 style="color: #007AFF;">Registrate</h1>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="form-group">
+        {{ form.nombre_completo.label_tag }}
+        {{ form.nombre_completo }}
+      </div>
+      <div class="form-group">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+      </div>
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+      <div class="form-group">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        <input type="checkbox" onclick="togglePassword('id_password1')"> Mostrar contraseña
+      </div>
+      <div class="form-group">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        <input type="checkbox" onclick="togglePassword('id_password2')"> Mostrar contraseña
+      </div>
+
+      <button type="submit">Registrarme</button>
+    </form>
+    <div class="login-link">
+      ¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(fieldId) {
+      const field = document.getElementById(fieldId);
+      if (field.type === "password") {
+        field.type = "text";
+      } else {
+        field.type = "password";
+      }
+    }
+  </script>
 
     </div>
 
