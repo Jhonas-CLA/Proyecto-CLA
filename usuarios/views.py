@@ -15,7 +15,13 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('home.html')  # mejor usar redirect a la url con nombre 'home'
+
+            # Redirige según el tipo de usuario
+            if user.is_superadmin or user.is_staff:
+                return redirect('dashboard')  # esta URL debe existir en tu urls.py
+            else:
+                return redirect('home')  # cambia por tu vista de inicio para usuarios normales
+
         else:
             return render(request, 'usuarios/login.html', {'alarma': 'Correo o contraseña no válida!'})
     else:
@@ -42,3 +48,13 @@ def registrar(request):
     else:
         form = UsuarioForm()
     return render(request, 'accion/registro.html', {'form': form})
+
+#******DASHBOARD******************#
+from django.contrib.auth.decorators import user_passes_test
+
+def es_admin(user):
+    return user.is_authenticated and (user.is_superadmin or user.is_staff)
+
+@user_passes_test(es_admin, login_url='login')
+def dashboard(request):
+    return render(request, 'admin/dashboard.html')  # usa tu template de dashboard

@@ -43,3 +43,4 @@ class UsuarioForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
