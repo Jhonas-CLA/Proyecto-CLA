@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            width: 280px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-align: center;
+            border: 2px solid #007bff;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .imagen {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .nombre {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .descripcion {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .precio {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .no-productos {
+            text-align: center;
+            font-size: 18px;
+            color: #999;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛒 Productos</h1>
+
+    {% if productos %}
+    <div class="contenedor">
+        {% for producto in productos %}
+            <div class="card">
+                {% if producto.imagen %}
+                    <img src="{{ producto.imagen.url }}" class="imagen" alt="{{ producto.nombre }}">
+                {% else %}
+                 <img src="https://www.conalfer-ja.com/wp-content/uploads/PVC030-TUBO-PVC-CONDUIT-1-PULGADA-Y-1-4.jpg" class="imagen" alt="PRODUCTOS DE CALIDAD">
+                {% endif %}
+                <div class="nombre">{{ producto.nombre }}</div>
+                <div class="descripcion">{{ producto.descripcion }}</div>
+                <div class="precio">$ {{ producto.precio|floatformat:2 }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="no-productos">No hay productos disponibles.</p>
+    {% endif %}
+</body>
+</html>
