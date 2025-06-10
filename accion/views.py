@@ -1,19 +1,40 @@
 from .models import Interfaz
+from .models import Producto 
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 
 # Create your views here.
 
-def layout(request):
-    interfaz=Interfaz.objects.all()
-    context={'interfaz':interfaz}
-    return render(request, 'accion/layout.html', context)
-
-
 def home(request):
-    interfaz=Interfaz.objects.all()
-    context={'interfaz':interfaz}
+    # Obtener los 10 productos más recientes o todos si hay menos de 10
+    productos = Producto.objects.all()[:10]
+    
+    # Agrupar productos de 4 en 4 para cada slide del carrusel
+    slides = []
+    for i in range(0, len(productos), 4):
+        slide_productos = productos[i:i+4]
+        slides.append(slide_productos)
+    
+    context = {
+        'slides': slides,
+        'productos': productos
+    }
     return render(request, 'accion/home.html', context)
+
+def layout(request):
+    # Misma lógica para layout.html
+    productos = Producto.objects.all()[:10]
+    
+    slides = []
+    for i in range(0, len(productos), 4):
+        slide_productos = productos[i:i+4]
+        slides.append(slide_productos)
+    
+    context = {
+        'slides': slides,
+        'productos': productos
+    }
+    return render(request, 'accion/layout.html', context)
 
 def quienesSomos(request):
     interfaz=Interfaz.objects.all()
@@ -55,4 +76,7 @@ def carrito_view(request):
     context={'interfaz':interfaz}
     return render(request, 'accion/gracias.html', context)
 
-
+def dashboard(request):
+    interfaz=Interfaz.objects.all()
+    context={'interfaz':interfaz}
+    return render(request, 'accion/dashboard.html', context)

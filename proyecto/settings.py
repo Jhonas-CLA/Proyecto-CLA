@@ -135,3 +135,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGIN_URL = '/usuarios/login/'  # Para evitar el error 404 al redirigir al login
 LOGIN_REDIRECT_URL = '/home.html'  # O la página que tengas después de iniciar sesión
+
+#Subir imagenes
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -76,26 +76,34 @@
         }
     </style>
 </head>
+{% load static %}
+
+{% load static %}
+
 <body>
-    <h1>🛒 Productos</h1>
+    <h1>🛒 Lista de Productos</h1>
 
     {% if productos %}
     <div class="contenedor">
         {% for producto in productos %}
-            <div class="card">
-                {% if producto.imagen %}
-                    <img src="{{ producto.imagen.url }}" class="imagen" alt="{{ producto.nombre }}">
-                {% else %}
-                 <img src="https://www.conalfer-ja.com/wp-content/uploads/PVC030-TUBO-PVC-CONDUIT-1-PULGADA-Y-1-4.jpg" class="imagen" alt="PRODUCTOS DE CALIDAD">
-                {% endif %}
-                <div class="nombre">{{ producto.nombre }}</div>
-                <div class="descripcion">{{ producto.descripcion }}</div>
-                <div class="precio">$ {{ producto.precio|floatformat:2 }}</div>
-            </div>
+            {% if producto.imagen %}
+                <div class="card">
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    <div class="contenido">
+                        <h2>{{ producto.nombre }}</h2>
+                        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+                        <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
+                        <p><strong>Precio:</strong> $ {{ producto.precio|floatformat:2 }}</p>
+                        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
     {% else %}
-        <p class="no-productos">No hay productos disponibles.</p>
+        <p>No hay productos disponibles.</p>
     {% endif %}
 </body>
+
+
 </html>

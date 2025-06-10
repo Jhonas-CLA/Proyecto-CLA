@@ -360,6 +360,24 @@
       ¿No tienes una cuenta? <a href="{% url 'registro' %}">Regístrate</a>
     </div>
   </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function (event) {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (email === "codigolatino12345@gmail.com" && password === "Codigolatino12345##") {
+        event.preventDefault(); // evita que se envíe el formulario
+
+        // Usa la URL generada por Django con el template tag
+        window.location.href = "{% url 'dashboard' %}";
+      }
+    });
+  });
+</script>
+
 
   <script>
     function togglePassword() {
@@ -367,6 +385,8 @@
       field.type = field.type === 'password' ? 'text' : 'password';
     }
   </script>
+    
+
 
 
 
@@ -453,4 +473,4 @@
 </script>
 
   </body>
-</html> 
+</html>

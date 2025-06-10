@@ -379,340 +379,194 @@
 </section>
 
     
-<!-- Carrusel -->
+<!-- Carrusel Dinámico -->
 <div id="carouselProductos" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="false">
     <div class="carousel-inner">
-
-      <!-- Slide 1 (de tus ejemplos) -->
-      <div class="carousel-item active">
-        <div class="row">
-          <div class="col-md-6 producto">
-            <img src="https://ecoled.com.co/cdn/shop/products/BOMBILLO-LED-GLOBO-CELSIA-DE--7W---9W_1024x1024_2x_91e50bfb-241f-4c9f-9e3f-c8529946672f_740x.webp?v=1719240346" alt="Bombillo LED">
-            <h6>Bombillo LED 12W</h6>
-            <p>Luz blanca 6500K, casquillo E27, ahorro de energía.</p>
-            <span class="precio-actual">$10.000</span>
-            <span class="precio-anterior">$15.000</span>
-            <div class="etiqueta-oferta">¡OFERTA!</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 12 unidades</p>
-          </div>
-          <div class="col-md-6 producto">
-            <img src="https://soelco.co/wp-content/uploads/MWD130317544.webp" alt="Tomacorriente doble">
-            <h6>Tomacorriente Doble</h6>
-            <p>Con tierra, ideal para oficinas y cocinas.</p>
-            <div class="etiqueta-precio">$10.000</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 18 unidades</p>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-          </div>
+        {% for slide in slides %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="row">
+                {% for producto in slide %}
+                <div class="col-md-6 producto">
+                    <div class="imagen-con-precio">
+                        {% if producto.imagen_url %}
+                            <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x180?text=Sin+Imagen" alt="{{ producto.nombre }}">
+                        {% endif %}
+                        
+                        <!-- Etiquetas dinámicas -->
+                        {% if producto.es_oferta %}
+                            <div class="etiqueta-oferta">¡OFERTA!</div>
+                        {% elif producto.es_nuevo %}
+                            <div class="etiqueta-nuevo animada">NUEVO</div>
+                        {% endif %}
+                    </div>
+                    
+                    <h6>{{ producto.nombre }}</h6>
+                    <p>{{ producto.descripcion|truncatechars:50 }}</p>
+                    
+                    <!-- Precios dinámicos -->
+                    {% if producto.es_oferta and producto.precio_anterior %}
+                        <span class="precio-actual">{{ producto.get_precio_formateado }}</span>
+                        <span class="precio-anterior">{{ producto.get_precio_anterior_formateado }}</span>
+                    {% else %}
+                        <div class="etiqueta-precio">{{ producto.get_precio_formateado }}</div>
+                    {% endif %}
+                    
+                    <!-- Rating dinámico -->
+                    <span class="text-warning">{{ producto.get_stars_display }}</span>
+                    
+                    <!-- Stock dinámico -->
+                    <p class="text-success mb-1">Stock: {{ producto.cantidad }} unidades</p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        <div class="row">
-          <div class="col-md-6 producto">
-            <img src="https://www.steren.com.co/media/catalog/product/cache/0236bbabe616ddcff749ccbc14f38bf2/image/18558d984/cable-coaxial-rg6-60-malla-de-cobre.jpg" alt="Cable coaxial">
-            <h6>Cable Coaxial RG6</h6>
-            <p>100 metros, doble blindaje para CCTV o TV.</p>
-            <div class="etiqueta-precio">$10.000</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 22 unidades</p>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-          </div>
-          <div class="col-md-6 producto">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3wJvW-wUvczt46P-4HeEWNuGVMIAZmau8vw&s" alt="Interruptor">
-            <h6>Interruptor Sencillo</h6>
-            <p>Blanco, 10A, empotrable, uso doméstico.</p>
-            <span class="precio-actual">$10.000</span>
-            <span class="precio-anterior">$15.000</span>
-            <div class="etiqueta-oferta">¡OFERTA!</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 16 unidades</p>
-          </div>
+        {% empty %}
+        <div class="carousel-item active">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>No hay productos disponibles</p>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Slide 2 (de tus ejemplos) -->
-      <div class="carousel-item">
-        <div class="row">
-          <div class="col-md-6 producto">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRed_VA629XNIAAhIV5WQyrWUsrGtMw4Im2w&s" alt="Tubo LED">
-            <h6>Tubo LED T8 18W</h6>
-            <p>120cm, encendido inmediato, luz fría.</p>
-            <span class="precio-actual">$10.000</span>
-            <span class="precio-anterior">$15.000</span>
-            <div class="etiqueta-oferta">¡OFERTA!</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 14 unidades</p>
-          </div>
-          <div class="col-md-6 producto">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrCBZNLopPoCme-QijfsV513yAqDPWXlElxQ&s" alt="Regleta">
-            <h6>Regleta Multitoma</h6>
-            <p>6 salidas, protección contra sobrecargas.</p>
-            <div class="etiqueta-precio">$10.000</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 8 unidades</p>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 producto">
-            <img src="https://bioled.com.co/wp-content/uploads/2014/11/highbaystadium-1.jpg" alt="Campana LED">
-            <h6>Campana Industrial LED</h6>
-            <p>100W, ideal para bodegas y talleres.</p>
-            <div class="etiqueta-precio">$10.000</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 13 unidades</p>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-          </div>
-          <div class="col-md-6 producto">
-            <img src="https://cdnx.jumpseller.com/llaves-la-competencia/image/21360881/resize/640/500?1640384295" alt="Timbre">
-            <h6>Timbre Inalámbrico</h6>
-            <p>Control remoto, múltiples tonos, 100m alcance.</p>
-            <span class="precio-actual">$10.000</span>
-            <span class="precio-anterior">$15.000</span>
-            <span class="text-warning">★★★★★</span>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-            <p class="text-success mb-1">Stock: 18 unidades</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3 (nuevo) -->
-      <div class="carousel-item">
-        <div class="row">
-          <div class="col-md-6 producto">
-            <img src="https://media.startech.com/cms/products/main/usb315ac1m.main.jpg" alt="Cable USB">
-            <h6>Cable USB Tipo C</h6>
-            <p>1 metro, carga rápida y transferencia 5Gbps.</p>
-            <div class="etiqueta-precio">$12.000</div>
-            <span class="text-warning">★★★★☆</span>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-            <p class="text-success mb-1">Stock: 20 unidades</p>
-          </div>
-          <div class="col-md-6 producto">
-            <img src="https://colombia.bioweb.co/cdn/shop/products/1_30b53b7c-f4ef-4746-bcdd-44bc6ca64d2d.jpg?v=1512413100" alt="Batería Recargable">
-            <h6>Batería Recargable 18650</h6>
-            <p>Capacidad 3000mAh, para linternas y dispositivos.</p>
-            <span class="precio-actual">$15.000</span>
-            <span class="precio-anterior">$20.000</span>
-            <div class="etiqueta-oferta">¡OFERTA!</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 25 unidades</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 producto">
-            <img src="https://http2.mlstatic.com/D_Q_NP_2X_690049-CBT80008644744_102024-T.webp" alt="Transformador">
-            <h6>Transformador 220V a 110V</h6>
-            <p>Potencia 500W, ideal para electrodomésticos.</p>
-            <div class="etiqueta-precio">$22.000</div>
-            <span class="text-warning">★★★★☆</span>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-            <p class="text-success mb-1">Stock: 12 unidades</p>
-          </div>
-          <div class="col-md-6 producto">
-            <img src="https://http2.mlstatic.com/D_NQ_NP_830926-MCO43695167034_102020-O.webp" alt="Interruptor Dimmer">
-            <h6>Interruptor Dimmer</h6>
-            <p>Regula la intensidad de la luz, compatible LED.</p>
-            <span class="precio-actual">$18.000</span>
-            <span class="precio-anterior">$25.000</span>
-            <div class="etiqueta-oferta">¡OFERTA!</div>
-            <span class="text-warning">★★★☆☆</span>
-            <p class="text-success mb-1">Stock: 14 unidades</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 4 (nuevo) -->
-      <div class="carousel-item">
-        <div class="row">
-          <div class="col-md-6 producto">
-            <img src="https://exitocol.vtexassets.com/arquivos/ids/15848019/bombillo-inteligente-compatible-alexa-google-wifi-control-luz-rgb.jpg?v=638055311697100000" alt="Bombilla Inteligente">
-            <h6>Bombilla Inteligente WiFi</h6>
-            <p>Controla con app, colores RGB, compatible Alexa.</p>
-            <div class="etiqueta-precio">$35.000</div>
-            <span class="text-warning">★★★★★</span>
-            <p class="text-success mb-1">Stock: 10 unidades</p>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-          </div>
-          <div class="col-md-6 producto">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRya4iuWW6y8eR_dRlhrxeKeTt83YOPkf4UZw&s" alt="Sensor de Movimiento">
-            <h6>Sensor de Movimiento PIR</h6>
-            <p>Detección hasta 8m, para seguridad en interiores.</p>
-            <span class="precio-actual">$12.000</span>
-            <span class="precio-anterior">$18.000</span>
-            <div class="etiqueta-oferta">¡OFERTA!</div>
-            <span class="text-warning">★★★★☆</span>
-            <p class="text-success mb-1">Stock: 15 unidades</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 producto">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp689dEhmluXlDIbZ_Yz1lAo7_m-dy7GLUtg&s" alt="Cable HDMI">
-            <h6>Cable HDMI 2.0</h6>
-            <p>2 metros, soporte 4K, alta velocidad.</p>
-            <div class="etiqueta-precio">$18.000</div>
-            <span class="text-warning">★★★★☆</span>
-            <div class="etiqueta-nuevo animada">NUEVO</div>
-            <p class="text-success mb-1">Stock: 30 unidades</p>
-          </div>
-          <div class="col-md-6 producto">
-            <img src="https://pcsforall.co/cdn/shop/products/CONV-USB-LAN-2-Side_grande.png?v=1739485204" alt="Adaptador USB">
-            <h6>Adaptador USB a RJ45</h6>
-            <p>Para conexión Ethernet en laptops y PCs.</p>
-            <span class="precio-actual">$14.000</span>
-            <span class="precio-anterior">$19.000</span>
-            <div class="etiqueta-oferta">¡OFERTA!</div>
-            <span class="text-warning">★★★☆☆</span>
-            <p class="text-success mb-1">Stock: 20 unidades</p>
-          </div>
-        </div>
-      </div>
-
+        {% endfor %}
     </div>
 
+    <!-- Controles del carrusel -->
+    {% if slides|length > 1 %}
     <a class="carousel-control-prev" href="#carouselProductos" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-      <span class="sr-only">Anterior</span>
+        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
     </a>
     <a class="carousel-control-next" href="#carouselProductos" role="button" data-slide="next">
-      <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-      <span class="sr-only">Siguiente</span>
+        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
     </a>
-  </div>
+    {% endif %}
 </div>
-    <style>
-          .producto {
-          text-align: center;
-          padding: 10px;
-        }
-        .producto img {
-          width: 100%;
-          height: 160px;
-          object-fit: cover;
-          border-radius: 6px;
-        }
-        .producto h6 {
-          margin-top: 10px;
-          font-weight: bold;
-        }
-        .producto p {
-          font-size: 0.9rem;
-          color: #555;
-        }
-      .producto img {
-        width: 100%;
-        height: 180px;
-        object-fit: contain;
-        background-color: #f8f9fa;
-        padding: 5px;
-        border-radius: 6px;
-      }
-    
-      .carousel-control-prev-icon,
-      .carousel-control-next-icon {
-        background-size: 100% 100%;
-      }
-    
-      .carousel-control-prev-icon {
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.5 0l-3.5 4 3.5 4v-8z'/%3E%3C/svg%3E");
-      }
-    
-      .carousel-control-next-icon {
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.5 0l3.5 4-3.5 4v-8z'/%3E%3C/svg%3E");
-      }
-      .imagen-con-precio {
-      position: relative;
-    }
-    
-    .imagen-con-precio img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      background-color: #f8f9fa;
-      padding: 5px;
-      border-radius: 6px;
-    }
-    
-    
-    
-    .etiqueta-oferta {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: crimson;
-      color: white;
-      padding: 2px 8px;
-      font-size: 0.75rem;
-      font-weight: bold;
-      border-radius: 4px;
-    }
-    @keyframes parpadeo {
-      0% { opacity: 1; }
-      50% { opacity: 0.4; }
-      100% { opacity: 1; }
-    }
-    
-    .etiqueta-nuevo {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background-color: #28a745;
-      color: white;
-      font-size: 0.75rem;
-      font-weight: bold;
-      padding: 4px 8px;
-      border-radius: 4px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      z-index: 1;
-    }
-    
-    .etiqueta-nuevo.animada {
-      animation: parpadeo 1.5s infinite;
-    }
-    .producto:hover {
-      background-color: #f1f1f1;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-    }
-    .franja-precio.oferta {
-      background-color: #000;
-      color: #ffc107;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: center;
-      padding: 8px 0;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-      border-radius: 0 0 6px 6px;
-    }
-    
-    .precio-actual {
-      color: #28a745;
-      margin-right: 10px;
-    }
-    
-    .precio-anterior {
-      color: #ccc;
-      text-decoration: line-through;
-      font-size: 0.9rem;
-    }
-    body, html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  max-width: 100%;
-  font-family: Arial, sans-serif;
+
+<style>
+.producto {
+    text-align: center;
+    padding: 10px;
+}
+.producto img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    padding: 5px;
+    border-radius: 6px;
+}
+.producto h6 {
+    margin-top: 10px;
+    font-weight: bold;
+}
+.producto p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-size: 100% 100%;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.5 0l-3.5 4 3.5 4v-8z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.5 0l3.5 4-3.5 4v-8z'/%3E%3C/svg%3E");
+}
+
+.imagen-con-precio {
+    position: relative;
+}
+
+.etiqueta-oferta {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: crimson;
+    color: white;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.etiqueta-precio {
+    background-color: #007bff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+@keyframes parpadeo {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+.etiqueta-nuevo {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #28a745;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+.etiqueta-nuevo.animada {
+    animation: parpadeo 1.5s infinite;
+}
+
+.producto:hover {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.precio-actual {
+    color: #28a745;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.precio-anterior {
+    color: #ccc;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    max-width: 100%;
+    font-family: Arial, sans-serif;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
-    </style>
-    
-    <!-- JS de Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</style>
+
+<!-- JS de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Sección de Envíos -->
 <section class="py-5">
