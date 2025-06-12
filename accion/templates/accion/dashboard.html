@@ -32,32 +32,32 @@
         </div>
         <!-- MENU -->
 <div class="menu">
-    <a href="usuarios.html" class="enlace">
+    <a href="#" class="enlace">
         <i class="bx bx-user"></i>
         <span>Usuarios</span>
     </a>
 
-    <a href="proveedor.html" class="enlace">
+    <a href="#" class="enlace">
         <i class="bx bx-user"></i>
         <span>Proveedores</span>
     </a>
 
-    <a href="analiticas.html" class="enlace">
+    <a href="#" class="enlace">
         <i class="bx bx-grid-alt"></i>
         <span>Analíticas</span>
     </a>
 
-    <a href="pedidos.html" class="enlace">
+    <a href="#" class="enlace">
         <i class="bx bx-cart"></i>
         <span>Pedidos</span>
     </a>
 
-    <a href="configuracion.html" class="enlace">
+    <a href="{% url 'configuracion' %}" class="enlace">
         <i class="bx bx-cog"></i>
         <span>Configuración</span>
     </a>
 
-    <a href="home.html" class="enlace">
+    <a href="{% url 'home' %}" class="enlace">
         <i class="bx bx-run"></i>
         <span>Salir</span>
     </a>
@@ -257,6 +257,39 @@ body {
 .menu-dashboard.open .menu .enlace span {
     opacity: 1;
 }
+
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0;
+}
+
+.dark-mode .register-container {
+  background-color: #1f1f1f !important;
+}
+
+.dark-mode .navbar,
+.dark-mode .footer {
+  background-color: #0d0d0d !important;
+}
+
+.dark-mode .nav-link,
+.dark-mode .dropdown-item {
+  color: #e0e0e0;
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #1f1f1f;
+  border-color: #333;
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #555;
+}
+
 </style>
     <script>
         const toggle = document.querySelector(".toggle")
@@ -281,6 +314,19 @@ enlacesMenu.forEach(enlace => {
     })
 })
     </script>
+
+<script>
+  // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Botón para alternar modo oscuro
+  document.getElementById('modoOscuroBtn').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+  });
+</script>
     
 </body>
 </html>

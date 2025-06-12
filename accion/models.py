@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Interfaz(models.Model):
     interfaz=models.CharField(max_length=100)
@@ -42,4 +43,29 @@ class Producto(models.Model):
         if self.precio_anterior:
             return f"${self.precio_anterior:,.0f}".replace(',', '.')
         return None
+    
+
+# Modelo administrador
+
+class Administrador(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    # Información personal
+    nombre_completo = models.CharField(max_length=100)
+    correo = models.EmailField()
+    telefono = models.CharField(max_length=20)
+    direccion = models.CharField(max_length=255)
+    foto = models.ImageField()
+
+    # Datos del negocio
+    nombre_local = models.CharField(max_length=100)
+    nit = models.CharField(max_length=30)
+    direccion_local = models.CharField(max_length=255)
+
+    # Preferencias
+    notificaciones = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.nombre_completo
+
 # Create your models here.

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div class="menu-dashboard">
+        <!-- TOP MENU -->
+        <div class="top-menu">
+            <div class="logo">
+                <img src="./img/logo.svg" alt="">
+                <span>Electricos & Soluciones</span>
+            </div>
+            <div class="toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+
+        <!-- INPUT SEARCH -->
+        <div class="input-search">
+            <i class='bx bx-search'></i>
+            <input type="text" class="input" placeholder="Buscar">
+        </div>
+
+        <!-- MENU -->
+        <div class="menu">
+            <a href="#" class="enlace">
+                <i class="bx bx-user"></i>
+                <span>Usuarios</span>
+            </a>
+            <a href="#" class="enlace">
+                <i class="bx bx-user"></i>
+                <span>Proveedores</span>
+            </a>
+            <a href="#" class="enlace">
+                <i class="bx bx-grid-alt"></i>
+                <span>Analíticas</span>
+            </a>
+            <a href="#" class="enlace">
+                <i class="bx bx-cart"></i>
+                <span>Pedidos</span>
+            </a>
+            <a href="{% url 'configuracion' %}" class="enlace">
+                <i class="bx bx-cog"></i>
+                <span>Configuración</span>
+            </a>
+            <a href="{% url 'home' %}" class="enlace">
+                <i class="bx bx-run"></i>
+                <span>Salir</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- CONFIGURACIÓN -->
+    <div class="contenedor-configuracion">
+        <div class="encabezado">
+            <h2>Configuración del Administrador</h2>
+            <button id="btnEditar" class="btn-editar"><i class='bx bx-edit'></i> Editar</button>
+        </div>
+
+<form id="form-configuracion" class="form-configuracion" method="POST" action="{% url 'guardar_configuracion' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <!-- Foto de perfil -->
+    <div class="seccion">
+        <label for="foto">Foto de Perfil</label>
+        <input type="file" id="foto" name="foto" disabled>
+        {% if admin.foto %}
+        <img src="{{ admin.foto.url }}" alt="Foto actual" class="foto-perfil">
+        {% endif %}
+    </div>
+
+    <!-- Información personal -->
+    <div class="seccion">
+        <label>Nombre completo</label>
+        <input type="text" name="nombre_completo" value="{{ admin.nombre_completo }}" disabled>
+
+        <label>Correo electrónico</label>
+        <input type="email" name="correo" value="{{ admin.correo }}" disabled>
+
+        <label>Teléfono</label>
+        <input type="tel" name="telefono" value="{{ admin.telefono }}" disabled>
+
+        <label>Dirección</label>
+        <input type="text" name="direccion" value="{{ admin.direccion }}" disabled>
+    </div>
+
+    <!-- Datos del negocio -->
+    <div class="seccion">
+        <label>Nombre del local</label>
+        <input type="text" name="nombre_local" value="{{ admin.nombre_local }}" disabled>
+
+        <label>NIT o RUT</label>
+        <input type="text" name="nit" value="{{ admin.nit }}" disabled>
+
+        <label>Dirección del local</label>
+        <input type="text" name="direccion_local" value="{{ admin.direccion_local }}" disabled>
+    </div>
+
+    
+
+    <!-- Preferencias -->
+    <div class="seccion">
+        <label>
+            <input type="checkbox" name="notificaciones" {% if admin.notificaciones %}checked{% endif %} disabled> Recibir notificaciones por correo
+        </label>
+    </div>
+
+    <button type="submit" id="btnGuardar" class="btn-guardar" style="display:none;">Guardar cambios</button>
+</form>
+
+
+    </div>
+
+<!-- ESTILOS -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+    :root {
+        --blanco: #E0E0E0;
+        --azul-opacidad: #184463;
+        --bg-menu: #003053;
+        --bg-body: #C7E1FF;
+
+        /* Modo oscuro */
+        --bg-dark: #121212;
+        --text-dark: #f0f0f0;
+        --card-dark: #1f1f1f;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Quicksand', sans-serif;
+        color: var(--blanco);
+        background-color: #f4f4f4;
+        font-weight: 600;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.modo-oscuro {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+    }
+
+    .menu-dashboard {
+        max-width: 150px;
+        height: 100vh;
+        background: var(--bg-menu);
+        padding: 20px;
+        transition: max-width .3s ease;
+        position: fixed;
+    }
+
+    .top-menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .top-menu .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .top-menu .logo img {
+        width: 40px;
+    }
+
+    .top-menu .logo span {
+        font-size: 20px;
+        margin-left: 20px;
+        display: none;
+        font-weight: 600;
+    }
+
+    .toggle {
+        width: 30px;
+        cursor: pointer;
+    }
+
+    .toggle i {
+        font-size: 35px;
+    }
+
+    .input-search {
+        width: 100%;
+        margin: 50px 0;
+        background-color: var(--azul-opacidad);
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-search i {
+        font-size: 30px;
+        margin-right: 20px;
+    }
+
+    .input-search .input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        width: 100%;
+        height: 30px;
+        color: var(--blanco);
+        font-size: 22px;
+        display: none;
+    }
+
+    .menu .enlace {
+        width: 100%;
+        padding: 20px 0 20px 17px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        cursor: pointer;
+        font-size: 20px;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+    }
+
+    .menu .enlace:hover {
+        background: var(--azul-opacidad);
+    }
+
+    .menu .enlace i {
+        margin-right: 20px;
+        font-size: 25px;
+    }
+
+    .menu .enlace span {
+        opacity: 0;
+        transition: opacity .3s ease;
+    }
+
+    .menu-dashboard.open {
+        max-width: 300px;
+    }
+
+    .menu-dashboard.open .top-menu .logo span,
+    .menu-dashboard.open .input-search .input,
+    .menu-dashboard.open .menu .enlace span {
+        display: block;
+        opacity: 1;
+    }
+
+    /* CONTENIDO CONFIGURACIÓN */
+    .contenedor-configuracion {
+        margin-left: 180px;
+        padding: 40px;
+        color: #111;
+        transition: color 0.3s ease;
+    }
+
+    body.modo-oscuro .contenedor-configuracion {
+        color: var(--text-dark);
+    }
+
+    .encabezado {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .encabezado h2 {
+        font-size: 28px;
+        color: #003053;
+    }
+
+    body.modo-oscuro .encabezado h2 {
+        color: #f0f0f0;
+    }
+
+    .btn-editar, .btn-guardar, .btn-modo-oscuro {
+        background-color: #003053;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .btn-editar i {
+        margin-right: 5px;
+    }
+
+    .form-configuracion {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .seccion {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .seccion input[type="text"],
+    .seccion input[type="email"],
+    .seccion input[type="tel"],
+    .seccion input[type="file"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background-color: #fff;
+        color: #111;
+        font-weight: 600;
+    }
+
+    body.modo-oscuro .seccion input {
+        background-color: var(--card-dark);
+        color: var(--text-dark);
+        border-color: #444;
+    }
+
+    .foto-perfil {
+        max-width: 120px;
+        max-height: 120px;
+        width: auto;
+        height: auto;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #003053;
+    }
+
+    .modo-oscuro .foto-perfil {
+        border-color: var(--text-dark);
+    }
+
+    .btn-modo-oscuro {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+    }
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0;
+}
+
+.dark-mode .register-container {
+  background-color: #1f1f1f !important;
+}
+
+.dark-mode .navbar,
+.dark-mode .footer {
+  background-color: #0d0d0d !important;
+}
+
+.dark-mode .nav-link,
+.dark-mode .dropdown-item {
+  color: #e0e0e0;
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #1f1f1f;
+  border-color: #333;
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #555;
+}
+
+.dark-mode .contenedor-configuracion{
+    color: white;
+    background-color:#1f1f1f !important;
+}
+
+.dark-mode .encabezado h2{
+    color: #0d6efd;
+}
+
+</style>
+
+
+    <!-- SCRIPTS -->
+    <script>
+    const toggle = document.querySelector(".toggle");
+    const menuDashboard = document.querySelector(".menu-dashboard");
+    const iconoMenu = toggle.querySelector("i");
+
+    toggle.addEventListener("click", () => {
+        menuDashboard.classList.toggle("open");
+        iconoMenu.classList.toggle("bx-menu");
+        iconoMenu.classList.toggle("bx-x");
+    });
+
+    // Modo edición
+    const btnEditar = document.getElementById('btnEditar');
+    const btnGuardar = document.getElementById('btnGuardar');
+    const form = document.getElementById('form-configuracion');
+    const inputs = form.querySelectorAll('input');
+
+    btnEditar.addEventListener('click', () => {
+        inputs.forEach(input => {
+            input.disabled = false;
+        });
+        btnGuardar.style.display = "inline-block";
+        btnEditar.style.display = "none";
+    });
+</script>
+<script>
+  // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Botón para alternar modo oscuro
+  document.getElementById('modoOscuroBtn').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+  });
+</script>
+
+
+</body>
+</html>

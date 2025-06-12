@@ -14,5 +14,8 @@ urlpatterns = [
     path('usuarios/registro/', views.registro, name='registro'),
     path('gracias.html', views.gracias, name="gracias"),
     path('carrito.html', views.carrito_view, name='carrito'),
-    path('dashboard.html', views.dashboard, name= 'dashboard')
+    path('dashboard.html', views.dashboard, name= 'dashboard'),
+    path('configuracion.html', views.configuracion, name='configuracion'),    
+    path('configuracion/', views.configuracion_admin, name='configuracion'),
+    path('guardar-configuracion/', views.guardar_configuracion, name='guardar_configuracion'),
 ]

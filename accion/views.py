@@ -2,6 +2,7 @@ from .models import Interfaz
 from .models import Producto 
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from .models import Administrador
 
 # Create your views here.
 
@@ -35,6 +36,42 @@ def layout(request):
         'productos': productos
     }
     return render(request, 'accion/layout.html', context)
+
+
+#Vista del administrador
+
+def guardar_configuracion(request):
+    if request.method == 'POST':
+        try:
+            admin = Administrador.objects.get(user=request.user)
+        except Administrador.DoesNotExist:
+            admin = Administrador(user=request.user)
+
+        admin.nombre_completo = request.POST.get('nombre_completo')
+        admin.correo = request.POST.get('correo')
+        admin.telefono = request.POST.get('telefono')
+        admin.direccion = request.POST.get('direccion')
+        admin.nombre_local = request.POST.get('nombre_local')
+        admin.nit = request.POST.get('nit')
+        admin.direccion_local = request.POST.get('direccion_local')
+        admin.notificaciones = 'notificaciones' in request.POST
+
+        if 'foto' in request.FILES:
+            admin.foto = request.FILES['foto']
+
+        admin.save()
+
+        # 🔁 Redirigir para recargar el admin en el formulario
+        return redirect('configuracion')
+
+
+    
+def configuracion_admin(request):
+    try:
+        admin = Administrador.objects.get(user=request.user)
+    except Administrador.DoesNotExist:
+        admin = Administrador(user=request.user)
+    return render(request, 'accion/configuracion.html', {'admin': admin})
 
 def quienesSomos(request):
     interfaz=Interfaz.objects.all()
@@ -80,3 +117,8 @@ def dashboard(request):
     interfaz=Interfaz.objects.all()
     context={'interfaz':interfaz}
     return render(request, 'accion/dashboard.html', context)
+
+def configuracion(request):
+    interfaz=Interfaz.objects.all()
+    context={'interfaz':interfaz}
+    return render(request, 'accion/configuracion.html', context)
