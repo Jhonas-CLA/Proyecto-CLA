@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Proveedores</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* ----- DISEÑO GENERAL ----- */
+        body {
+            margin: 0;
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+
+        /* ----- MENÚ LATERAL ----- */
+        .menu-dashboard {
+            width: 250px;
+            background-color: #002f4b;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+        }
+
+        .top-menu {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .input-search {
+            padding: 0 20px;
+        }
+
+        .input-search input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .menu {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .enlace {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .enlace i {
+            margin-right: 10px;
+        }
+
+        /* ----- CONTENIDO PRINCIPAL ----- */
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            width: 100%;
+            background-color: #f5f5f5;
+        }
+
+        .main-content h1 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .btn-success {
+            background-color: green;
+        }
+
+        .btn-danger {
+            background-color: red;
+        }
+
+        .btn-primary {
+            background-color: dodgerblue;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DASHBOARD LATERAL -->
+    <div class="menu-dashboard">
+        <!-- TOP MENU -->
+        <div class="top-menu">
+            <div class="logo">
+                <img src="./img/logo.svg" alt="Logo">
+                <span>Electricos & Soluciones</span>
+            </div>
+        </div>
+
+        <!-- INPUT SEARCH -->
+        <div class="input-search">
+            <i class='bx bx-search'></i>
+            <input type="text" class="input" placeholder="Buscar">
+        </div>
+
+        <!-- MENU -->
+        <div class="menu">
+            <a href="#" class="enlace">
+                <i class="bx bx-user"></i>
+                <span>Usuarios</span>
+            </a>
+
+            <a href="{% url 'proveedores_list' %}" class="enlace">
+                <i class="bx bx-user"></i>
+                <span>Proveedores</span>
+            </a>
+
+            <a href="#" class="enlace">
+                <i class="bx bx-grid-alt"></i>
+                <span>Analíticas</span>
+            </a>
+
+            <a href="#" class="enlace">
+                <i class="bx bx-cart"></i>
+                <span>Pedidos</span>
+            </a>
+
+            <a href="{% url 'configuracion' %}" class="enlace">
+                <i class="bx bx-cog"></i>
+                <span>Configuración</span>
+            </a>
+
+            <a href="{% url 'home' %}" class="enlace">
+                <i class="bx bx-run"></i>
+                <span>Salir</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DE PROVEEDORES -->
+    <div class="main-content">
+        <h1>Listado de Proveedores</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Dirección</th>
+                    <th>Contacto</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proveedor in proveedores %}
+                <tr>
+                    <td>{{ proveedor.nombre }}</td>
+                    <td>{{ proveedor.direccion }}</td>
+                    <td>{{ proveedor.contacto }}</td>
+                    <td>{{ proveedor.estado }}</td>
+                    <td>
+                        <a href="{% url 'editar_proveedor' proveedor.pk %}" class="btn btn-success">Editar</a>
+                        <a href="{% url 'eliminar_proveedor' proveedor.pk %}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'agregar_proveedor' %}" class="btn btn-primary">Agregar nuevo proveedor</a>
+    </div>
+
+</body>
+</html>

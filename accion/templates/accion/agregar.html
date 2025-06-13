@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Proveedor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #ccc;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Agregar Proveedor</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="btn-container">
+                <button type="submit">Guardar</button>
+            </div>
+        </form>
+        <a href="{% url 'proveedores_list' %}">Volver a la lista</a>
+    </div>
+</body>
+</html>

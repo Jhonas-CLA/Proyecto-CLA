@@ -53,11 +53,26 @@ class Administrador(models.Model):
     direccion = models.TextField(blank=True, null=True)
     nombre_negocio = models.CharField(max_length=100)
     nit_rut = models.CharField(max_length=20, blank=True, null=True)
-    logo = models.ImageField()
+    logo = models.ImageField(upload_to='logos/', null=True, blank=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     actualizado = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nombre_completo
+    
+#Proveedor
+
+class Proveedor(models.Model):
+    nombre = models.CharField(max_length=255)
+    direccion = models.CharField(max_length=255)
+    contacto = models.EmailField()
+    ESTADO_CHOICES = [
+        ('activo', 'Activo'),
+        ('inactivo', 'Inactivo'),
+    ]
+    estado = models.CharField(max_length=8, choices=ESTADO_CHOICES, default='activo')
+
+    def __str__(self):
+        return self.nombre
 
 # Create your models here.

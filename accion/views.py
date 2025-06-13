@@ -1,10 +1,13 @@
 from .models import Interfaz
 from .models import Producto 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 
 from .models import Administrador
 from .forms import AdministradorForm
+
+from .models import Proveedor
+from .forms import ProveedorForm
 # Create your views here.
 
 def home(request):
@@ -78,6 +81,8 @@ def dashboard(request):
     context={'interfaz':interfaz}
     return render(request, 'accion/dashboard.html', context)
 
+#Configuracion admin
+
 def configuracion(request):
     interfaz=Interfaz.objects.all()
     context={'interfaz':interfaz}
@@ -95,3 +100,37 @@ def configuracion_admin(request):
         form = AdministradorForm(instance=admin)
 
     return render(request, 'accion/configuracion.html', {'form': form, 'admin': admin})
+
+#Proveedor
+
+def proveedores_list(request):
+    proveedores = Proveedor.objects.all()
+    return render(request, 'accion/proveedores_list.html', {'proveedores': proveedores})
+
+def editar_proveedor(request, pk):
+    proveedor = get_object_or_404(Proveedor, pk=pk)
+    if request.method == 'POST':
+        form = ProveedorForm(request.POST, instance=proveedor)
+        if form.is_valid():
+            form.save()
+            return redirect('proveedores_list')
+    else:
+        form = ProveedorForm(instance=proveedor)
+    return render(request, 'accion/editar.html', {'form': form})
+
+def eliminar_proveedor(request, pk):
+    proveedor = get_object_or_404(Proveedor, pk=pk)
+    if request.method == 'POST':
+        proveedor.delete()
+        return redirect('proveedores_list')
+    return render(request, 'accion/eliminar.html', {'proveedor': proveedor})
+
+def agregar_proveedor(request):
+    if request.method == 'POST':
+        form = ProveedorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('proveedores_list')
+    else:
+        form = ProveedorForm()
+    return render(request, 'accion/agregar.html', {'form': form})

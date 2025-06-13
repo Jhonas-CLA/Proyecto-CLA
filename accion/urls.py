@@ -19,4 +19,8 @@ urlpatterns = [
     path('dashboard.html', views.dashboard, name= 'dashboard'),
     path('configuracion.html', views.configuracion, name='configuracion'),
     path('configuracion/', configuracion_admin, name='configuracion'),
+    path('proveedores/', views.proveedores_list, name='proveedores_list'),
+    path('proveedor/editar/<int:pk>/', views.editar_proveedor, name='editar_proveedor'),
+    path('proveedor/eliminar/<int:pk>/', views.eliminar_proveedor, name='eliminar_proveedor'),
+    path('proveedor/agregar/', views.agregar_proveedor, name='agregar_proveedor'),
 ]
