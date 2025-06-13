@@ -61,11 +61,6 @@ def carrito_view(request):
     context={'interfaz':interfaz}
     return render(request, 'accion/gracias.html', context)
 
-def dashboard(request):
-    interfaz=Interfaz.objects.all()
-    context={'interfaz':interfaz}
-    return render(request, 'accion/dashboard.html', context)
-
 def loginadmin(request):
     interfaz=Interfaz.objects.all()
     context={'interfaz':interfaz}
@@ -129,6 +124,3 @@ def agregar_proveedor(request):
 
 def analiticas(request):
     return render(request, 'accion/analiticas.html')
-
-def dashboard(request):
-    return render(request, 'accion/dashboard.html')

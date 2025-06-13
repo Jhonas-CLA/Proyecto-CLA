@@ -22,11 +22,6 @@
             </div>
         </div>
 
-        <div class="input-search">
-            <i class='bx bx-search'></i>
-            <input type="text" class="input" placeholder="Buscar">
-        </div>
-
         <div class="menu">
             <a href="#" class="enlace"><i class="bx bx-user"></i><span>Usuarios</span></a>
             <a href="{% url 'proveedores_list' %}" class="enlace"><i class="bx bx-user"></i><span>Proveedores</span></a>
@@ -151,6 +146,10 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+}
+
+.menu-dashboard .logo span{
+    margin-bottom: 10%;
 }
 
 .top-menu {
