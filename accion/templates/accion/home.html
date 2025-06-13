@@ -380,6 +380,7 @@
 
     
 <!-- Carrusel Dinámico -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <div id="carouselProductos" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="false">
     <div class="carousel-inner">
         {% for slide in slides %}
@@ -387,20 +388,17 @@
             <div class="row">
                 {% for producto in slide %}
                 <div class="col-md-6 producto">
-                    <div class="imagen-con-precio">
-                        {% if producto.imagen_url %}
-                            <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300x180?text=Sin+Imagen" alt="{{ producto.nombre }}">
-                        {% endif %}
-                        
-                        <!-- Etiquetas dinámicas -->
-                        {% if producto.es_oferta %}
-                            <div class="etiqueta-oferta">¡OFERTA!</div>
-                        {% elif producto.es_nuevo %}
-                            <div class="etiqueta-nuevo animada">NUEVO</div>
-                        {% endif %}
-                    </div>
+                  <div class="imagen-con-precio">
+    {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+    {% else %}
+        <img src="https://via.placeholder.com/300x180?text=Sin+Imagen" alt="{{ producto.nombre }}">
+    {% endif %}
+    
+
+    <!-- Etiquetas dinámicas -->
+<div class="etiqueta-precio">${{ producto.precio }}</div>
+</div>
                     
                     <h6>{{ producto.nombre }}</h6>
                     <p>{{ producto.descripcion|truncatechars:50 }}</p>
@@ -414,7 +412,11 @@
                     {% endif %}
                     
                     <!-- Rating dinámico -->
-                    <span class="text-warning">{{ producto.get_stars_display }}</span>
+                   <span class="text-warning">
+    {% for _ in "12345" %}
+        <i class="fas fa-star"></i>
+    {% endfor %}
+</span>>
                     
                     <!-- Stock dinámico -->
                     <p class="text-success mb-1">Stock: {{ producto.cantidad }} unidades</p>

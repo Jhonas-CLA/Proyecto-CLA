@@ -11,35 +11,20 @@ from .forms import ProveedorForm
 # Create your views here.
 
 def home(request):
-    # Obtener los 10 productos más recientes o todos si hay menos de 10
-    productos = Producto.objects.all()[:10]
-    
-    # Agrupar productos de 4 en 4 para cada slide del carrusel
-    slides = []
-    for i in range(0, len(productos), 4):
-        slide_productos = productos[i:i+4]
-        slides.append(slide_productos)
-    
-    context = {
-        'slides': slides,
-        'productos': productos
-    }
-    return render(request, 'accion/home.html', context)
+    productos = Producto.objects.all()
+
+    # Agrupar de 2 en 2 para cada slide del carrusel
+    slides = [productos[i:i + 2] for i in range(0, len(productos), 2)]
+
+    return render(request, 'accion/home.html', {'slides': slides})
+
+from django.shortcuts import render
+from productos.models import Producto
 
 def layout(request):
-    # Misma lógica para layout.html
-    productos = Producto.objects.all()[:10]
-    
-    slides = []
-    for i in range(0, len(productos), 4):
-        slide_productos = productos[i:i+4]
-        slides.append(slide_productos)
-    
-    context = {
-        'slides': slides,
-        'productos': productos
-    }
-    return render(request, 'accion/layout.html', context)
+    productos = Producto.objects.all()
+    slides = [productos[i:i+2] for i in range(0, len(productos), 2)]
+    return render(request, 'accion/layout.html', {'slides': slides})
 
 def quienesSomos(request):
     interfaz=Interfaz.objects.all()
@@ -80,6 +65,11 @@ def dashboard(request):
     interfaz=Interfaz.objects.all()
     context={'interfaz':interfaz}
     return render(request, 'accion/dashboard.html', context)
+
+def loginadmin(request):
+    interfaz=Interfaz.objects.all()
+    context={'interfaz':interfaz}
+    return render(request, 'accion/loginadmin.html', context)
 
 #Configuracion admin
 
@@ -134,3 +124,11 @@ def agregar_proveedor(request):
     else:
         form = ProveedorForm()
     return render(request, 'accion/agregar.html', {'form': form})
+
+#Esto es analiticas
+
+def analiticas(request):
+    return render(request, 'accion/analiticas.html')
+
+def dashboard(request):
+    return render(request, 'accion/dashboard.html')
