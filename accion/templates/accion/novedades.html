@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+      
+      .footer {
+        background-color: #001054;
+        color: white;
+        padding: 40px 30px;
+        font-size: 16px;
+      }
+
+      .footer .logo {
+        font-size: 60px;
+        font-weight: bold;
+        border-left: 5px solid white;
+        border-right: 5px solid white;
+        padding: 0 15px;
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+
+      .footer .vertical-bar {
+        border-left: 3px solid white;
+        height: 100%;
+      }
+
+      .footer .small-text {
+        font-size: 14px;
+      }
+
+      /* Estilos para centrar las subcategorías del dropdown */
+      .dropdown-menu {
+        text-align: center;
+        min-width: 100%;
+      }
+
+      a:hover {
+        transform: scale(1.05);
+      }
+
+      .dropdown-menu .dropdown-item {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      }
+    </style>
+    <style>
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  @media (max-width: 576px) {
+    .card-img-top {
+      height: 150px;
+    }
+  }
+  body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0;
+}
+
+.dark-mode .register-container {
+  background-color: #1f1f1f !important;
+}
+
+.dark-mode .navbar,
+.dark-mode .footer {
+  background-color: #0d0d0d !important;
+}
+
+.dark-mode .nav-link,
+.dark-mode .dropdown-item {
+  color: #e0e0e0;
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #1f1f1f;
+  border-color: #333;
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #555;
+}
+
+.dark-mode .card{
+  background-color: black;
+  color: white;
+  box-shadow: 0px 2px 0px white;
+}
+
+.dark-mode .titulo-noticias{
+  color: white;
+}
+</style>
+
+  </head>
+  <body>
+
+<nav
+  class="navbar navbar-expand-md"
+  style="background-color: #001152; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.4);"
+>
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img
+        src="https://i.postimg.cc/YCZg4n8g/LOGO-ELECTRICOS-removebg-preview.png"
+        alt="Logo"
+        width="80"
+        height="70"
+      />
+    </a>
+
+    <button
+      class="navbar-toggler text-white"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarContent"
+    >
+      <span class="navbar-toggler-icon">☰</span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav mx-auto text-center">
+        <li class="nav-item px-2">
+          <a
+            class="nav-link fw-bold text-white"
+            href="{% url 'quienesSomos' %}"
+            style="font-size: 1.4rem; line-height: 1.2; transition: all 0.3s; border-bottom: 2px solid transparent;"
+            onmouseover="this.style.color='#a3c4f3'; this.style.transform='translateY(-3px)'; this.style.borderBottom='2px solid #a3c4f3';"
+            onmouseout="this.style.color='white'; this.style.transform='translateY(0)'; this.style.borderBottom='2px solid transparent';"
+            >Quienes Somos</a
+          >
+        </li>
+        <li class="nav-item dropdown px-2">
+          <a
+            class="nav-link dropdown-toggle fw-bold text-white"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            style="font-size: 1.4rem; line-height: 1.2; transition: all 0.3s; border-bottom: 2px solid transparent;"
+            onmouseover="this.style.color='#a3c4f3'; this.style.transform='translateY(-3px)'; this.style.borderBottom='2px solid #a3c4f3';"
+            onmouseout="this.style.color='white'; this.style.transform='translateY(0)'; this.style.borderBottom='2px solid transparent';"
+            >Categorías</a
+          >
+          <div
+            class="dropdown-menu text-center"
+            aria-labelledby="navbarDropdown"
+            style="background-color: white; border: none; border-radius: 10px; padding: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);"
+          >
+            <a
+              class="dropdown-item fw-bold"
+              href="#"
+              style="color: #001152; font-size: 1.2rem; border-radius: 8px; padding: 8px 16px;"
+              onmouseover="this.style.backgroundColor='#FFD700'; this.style.color='black';"
+              onmouseout="this.style.backgroundColor=''; this.style.color='#001152';"
+              >Subcategoría 1</a
+            >
+            <a
+              class="dropdown-item fw-bold"
+              href="#"
+              style="color: #001152; font-size: 1.2rem; border-radius: 8px; padding: 8px 16px;"
+              onmouseover="this.style.backgroundColor='#FFD700'; this.style.color='black';"
+              onmouseout="this.style.backgroundColor=''; this.style.color='#001152';"
+              >Subcategoría 2</a
+            >
+          </div>
+        </li>
+        <li class="nav-item px-2">
+          <a
+            class="nav-link fw-bold text-white"
+            href="{% url 'novedades' %}"
+            style="font-size: 1.4rem; line-height: 1.2; transition: all 0.3s; border-bottom: 2px solid transparent;"
+            onmouseover="this.style.color='#a3c4f3'; this.style.transform='translateY(-3px)'; this.style.borderBottom='2px solid #a3c4f3';"
+            onmouseout="this.style.color='white'; this.style.transform='translateY(0)'; this.style.borderBottom='2px solid transparent';"
+            >Novedades</a
+          >
+        </li>
+        <li class="nav-item px-2">
+          <a
+            class="nav-link fw-bold text-white"
+            href="{% url 'contacto' %}"
+            style="font-size: 1.4rem; line-height: 1.2; transition: all 0.3s; border-bottom: 2px solid transparent;"
+            onmouseover="this.style.color='#a3c4f3'; this.style.transform='translateY(-3px)'; this.style.borderBottom='2px solid #a3c4f3';"
+            onmouseout="this.style.color='white'; this.style.transform='translateY(0)'; this.style.borderBottom='2px solid transparent';"
+            >Contacto</a
+          >
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link" href="{% url 'carrito' %}">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/8146/8146003.png"
+              alt="Carrito"
+              style="width: 40px; height: 40px; object-fit: cover;"
+            />
+          </a>
+        </li>
+        <li class="nav-item d-md-none px-2">
+          <a
+            class="nav-link text-white fw-bold"
+            href="{% url 'inicioSesion' %}"
+            style="font-size: 1.4rem;"
+            >Iniciar Sesión</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="d-none d-md-block">
+      <a
+        href="{% url 'login' %}"
+        class="d-inline-block rounded-circle border border-white overflow-hidden"
+        style="width: 60px; height: 60px;"
+      >
+        <img
+          src="https://static.vecteezy.com/ti/vetor-gratis/p3/7407996-user-icon-person-icon-client-symbol-login-head-sign-icon-design-vetor.jpg"
+          alt="Usuario"
+          style="width: 100%; height: 100%; object-fit: cover;"
+        />
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Mensaje -->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sección de Noticias</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .btn-ver-mas {
+      background-color: #1e3a8a;
+      color: white;
+      border-radius: 8px;
+      padding: 10px 20px;
+      transition: 0.3s;
+    }
+    .btn-ver-mas:hover {
+      background-color: #3b82f6;
+      transform: scale(1.05);
+    }
+    h2 {
+      text-align: center;
+      margin: 40px 0 20px 0;
+      font-size: 40px ;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sección de Noticias -->
+  <div class="container my-5">
+
+
+<h2 class="titulo-noticias"> Últimas Noticias</h2>
+
+<style>
+  .titulo-noticias {
+    color:#001152 ;
+    font-size: 60px;
+    min-height: 20px;
+  }
+</style>
+
+
+    <div class="row">
+
+      <!-- Noticia 1 -->
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="https://imagenes.eltiempo.com/files/image_1200_535/uploads/2024/12/31/67740f1b9075c.jpeg" class="card-img-top" alt="Imagen 1">
+          <div class="card-body">
+            <h5 class="card-title">Petro dice que se reducirán tarifas de energía y anuncia instalación paneles solares en estratos 1 y 2</h5>
+            <p class="card-text">El presidente Gustavo Petro aseguró este 31 de diciembre que en Colombia se van a reducir las tarifas de energía gracias a una resolución aprobada recientemente por la Creg, en la cual se habilita a las empresas intervenidas para contratar energía de manera directa.
+
+</p>
+            <a href="https://www.eltiempo.com/politica/gobierno/presidente-gustavo-petro-asegura-que-se-van-a-reducir-tarifas-de-energia-electrica-en-colombia-3413778" class="btn-ver-mas">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia 2 -->
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="https://cdn.pixabay.com/photo/2016/11/23/18/13/light-bulbs-1854161_1280.jpg" class="card-img-top" alt="Imagen 2">
+          <div class="card-body">
+            <h5 class="card-title">    Un nuevo plan para llevar luz a 300 millones de personas en África
+      que las actuales</h5>
+            <p class="card-text">Los líderes de más de la mitad de las naciones de África se reunieron el mes pasado en Dar es Salaam para comprometerse a realizar el mayor aumento del gasto en generación de energía eléctrica en la historia de África.
+</p>
+            <a href="https://www.eltiempo.com/mundo/new-york-times-international-weekly/un-nuevo-plan-para-llevar-luz-a-300-millones-en-africa-3426451" class="btn-ver-mas">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia 3 -->
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="https://cdn.pixabay.com/photo/2021/05/02/02/05/elon-musk-6222396_1280.jpg" class="card-img-top" alt="Imagen 3">
+          <div class="card-body">
+            <h5 class="card-title">Elon Musk señala que la próxima gran sequía será de electricidad, no de agua</h5>
+            <p class="card-text"> Durante el cierre de la conferencia Bosch Connected World, evento que reúne a empresarios, desarrolladores y expertos en la innovación tecnológica, Elon Musk hizo una declaración que dejó a todos los asistentes reflexionando.</p>
+            <a href="https://www.eltiempo.com/cultura/gente/elon-musk-senala-que-la-proxima-gran-sequia-sera-de-electricidad-no-de-agua-3415148" class="btn-ver-mas">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia 4 -->
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <img src="https://media.istockphoto.com/id/944500712/photo/green-electric-car-energy-in-transportation-electric-concept.jpg?s=1024x1024&w=is&k=20&c=3qlcl977rwiYexRLcBjOD3PJtUO5-LUMnQ4hS-03Ux0=" class="card-img-top" alt="Imagen 4">
+          <div class="card-body">
+            <h5 class="card-title"> Colombia, reconectada:  se convirtió en un potente mercado para vehículos híbridos y eléctricos</h5>
+            <p class="card-text"> En 2024, Colombia marcó un hito en la venta de vehículos híbridos y eléctricos, que representaron el 25 % del mercado.</p>
+            <a href="https://www.eltiempo.com/economia/sectores/colombia-reconectada-3416572" class="btn-ver-mas">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia 5 -->
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <img src="https://cdn.pixabay.com/photo/2020/03/01/10/24/power-4892237_1280.jpg" class="card-img-top" alt="Imagen 5">
+          <div class="card-body">
+            <h5 class="card-title">¿Qué es el 'cero absoluto', el fenómeno que dejó sin electricidad a España y países de Europa?</h5>
+            <p class="card-text">Pasados unos minutos del mediodía, en horario local de España, la electricidad desapareció repentinamente en gran parte del territorio nacional y en Portugal. </p>
+            <a href="https://www.eltiempo.com/mundo/europa/que-es-el-cero-absoluto-el-fenomeno-que-dejo-sin-electricidad-a-espana-y-paises-de-europa-3448713" class="btn-ver-mas">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+  <footer style="background-color: #001152; color: white; padding: 30px 0;">
+    <div class="container text-center">
+      <!-- Logo y descripción -->
+      <div class="mb-4" >
+        <h4 class="fw-bold mb-2">E&amp;S</h4>
+        <p class="mb-0 small">
+          Amplio catálogo en productos eléctricos y<br>
+          distribuidores desde hace más de 5 años.
+        </p>
+      </div>
+      <div class="container text-center">
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <h5 class="mb-2">Contáctanos</h5>
+            <p class="mb-1"><strong>Teléfono:</strong><br>+57 315 651 76 89</p>
+            <p class="mb-1"><strong>Email:</strong><br>edingaitan@hotmail.com</p>
+          </div>
+          <div class="col-md-4">
+            <h5 class="mb-2">Enlaces Rápidos</h5>
+            <p class="mb-1"><a href="catalogo.html" class="text-white">Catálogo</a></p>
+            <p class="mb-1"><a href="quienesSomos.html" class="text-white">Quiénes Somos</a></p>
+            <p class="mb-1"><a href="novedades.html" class="text-white">Novedades</a></p>
+            <p class="mb-1"><a href="contacto.html" class="text-white">Contacto</a></p>
+            <p class="mb-1"><a href="carrito.html" class="text-white">Carrito</a></p>
+          </div>
+          <div class="col-md-4">
+            <h5 class="mb-2">Legal</h5>
+            <p class="mb-1"><a href="#" class="text-white">Términos y Condiciones</a></p>
+            <p class="mb-1"><a href="#" class="text-white">Política de Privacidad</a></p>
+          </div>
+        </div>
+      </div>
+      
+      
+  
+      <!-- Línea inferior -->
+      <div class="mt-3 border-top pt-2 small">
+        &copy; 2025 E&amp;S. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+  <script>
+      // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+  </script>
+    <script>
+  // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Botón para alternar modo oscuro
+  document.getElementById('modoOscuroBtn').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+  });
+</script>
+  </body>
+</html>

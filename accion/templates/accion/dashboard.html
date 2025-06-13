@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Dashboard</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="./css/estilos.css">
+    <!-- CUSTOM JS -->
+    <script src="./js/app.js" defer></script>
+</head>
+<body>
+
+    <div class="menu-dashboard">
+        <!-- TOP MENU -->
+        <div class="top-menu">
+            <div class="logo">
+                <img src="./img/logo.svg" alt="">
+                <span>Electricos & Soluciones</span>
+            </div>
+            <div class="toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+        <!-- INPUT SEARCH -->
+        <div class="input-search">
+            <i class='bx bx-search'></i>
+            <input type="text" class="input" placeholder="Buscar">
+        </div>
+        <!-- MENU -->
+<div class="menu">
+    <a href="#" class="enlace">
+        <i class="bx bx-user"></i>
+        <span>Usuarios</span>
+    </a>
+
+    <a href="#" class="enlace">
+        <i class="bx bx-user"></i>
+        <span>Proveedores</span>
+    </a>
+
+    <a href="#" class="enlace">
+        <i class="bx bx-grid-alt"></i>
+        <span>Analíticas</span>
+    </a>
+
+    <a href="#" class="enlace">
+        <i class="bx bx-cart"></i>
+        <span>Pedidos</span>
+    </a>
+
+    <a href="{% url 'configuracion' %}" class="enlace">
+        <i class="bx bx-cog"></i>
+        <span>Configuración</span>
+    </a>
+
+    <a href="{% url 'home' %}" class="enlace">
+        <i class="bx bx-run"></i>
+        <span>Salir</span>
+    </a>
+</div>
+
+    </div>
+    <style>
+        /* FONTS GOOGLE */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+/* VARIABLES */
+
+:root {
+    --blanco: #E0E0E0;
+    --azul-opacidad: #184463;
+    --bg-menu: #003053;
+    --bg-body: #C7E1FF;
+}
+
+/* GENERALES */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--blanco);
+}
+
+/* LAYOUT */
+
+.menu-dashboard {
+    max-width: 150px;
+    height: 100vh;
+    background: var(--bg-menu);
+    padding: 20px;
+    transition: max-width .3s ease;
+}
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-menu .logo {
+    display: flex;
+    align-items: center;
+}
+
+.top-menu .logo img {
+    width: 40px;
+    transition: width .3s ease;
+}
+
+.top-menu .logo span {
+    font-size: 20px;
+    margin-left: 20px;
+    display: none;
+}
+
+.top-menu .toggle {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.top-menu .toggle i {
+    font-size: 35px;
+}
+
+/* INPUT BOX */
+
+.input-search {
+    width: 100%;
+    margin: 50px 0;
+    background-color: var(--azul-opacidad);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.input-search i {
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+.input-search .input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    height: 30px;
+    color: var(--blanco);
+    font-size: 22px;
+    display: none;
+}
+
+/* ENLACES MENU */
+
+    .menu .enlace {
+        width: 100%;
+        padding: 20px 0 20px 17px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        cursor: pointer;
+        font-size: 20px;
+        transition: all .3s ease;
+        text-decoration: none; /* QUITA LA LÍNEA DEBAJO DEL TEXTO */
+        color: white; /* COLOR BLANCO PARA EL TEXTO */
+    }
+
+    .menu .enlace:hover {
+        background: var(--azul-opacidad);
+    }
+
+    .menu .enlace i {
+        margin-right: 20px;
+        font-size: 25px;
+    }
+
+    .menu .enlace span {
+        opacity: 0;
+        transition: opacity .3s ease;
+        color: white; /* COLOR BLANCO PARA EL SPAN TAMBIÉN */
+    }
+
+    .menu-dashboard.open .menu .enlace span {
+        opacity: 1;
+    }
+
+    /* También puedes asegurarte que todos los enlaces del menú tengan texto blanco */
+    .menu .enlace:visited,
+    .menu .enlace:link,
+    .menu .enlace:active {
+        color: white;
+        text-decoration: none;
+    }
+
+.menu .enlace {
+    width: 100%;
+    padding: 20px 0 20px 17px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all .3s ease;
+}
+
+.menu .enlace:hover {
+    background: var(--azul-opacidad);
+}
+
+.menu .enlace i {
+    margin-right: 20px;
+    font-size: 25px;
+}
+
+.menu .enlace span {
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.menu-dashboard.open {
+    max-width: 300px;
+    color: white;
+}
+
+.menu-dashboard.open .top-menu .logo span {
+    display: block;
+}
+
+.menu-dashboard.open .input-search
+.menu-dashboard.open .menu .enlace {
+    width: auto;
+}
+
+.menu-dashboard.open .input-search .input {
+    display: block;
+}
+
+.menu-dashboard.open .menu .enlace {
+    padding: 20px;
+}
+
+.menu-dashboard.open .menu .enlace span {
+    opacity: 1;
+}
+
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0;
+}
+
+.dark-mode .register-container {
+  background-color: #1f1f1f !important;
+}
+
+.dark-mode .navbar,
+.dark-mode .footer {
+  background-color: #0d0d0d !important;
+}
+
+.dark-mode .nav-link,
+.dark-mode .dropdown-item {
+  color: #e0e0e0;
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #1f1f1f;
+  border-color: #333;
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #555;
+}
+
+</style>
+    <script>
+        const toggle = document.querySelector(".toggle")
+const menuDashboard = document.querySelector(".menu-dashboard")
+const iconoMenu = toggle.querySelector("i")
+const enlacesMenu = document.querySelectorAll(".enlace")
+
+toggle.addEventListener("click", () => {
+    menuDashboard.classList.toggle("open")
+
+    if(iconoMenu.classList.contains("bx-menu")){
+        iconoMenu.classList.replace("bx-menu", "bx-x")
+    }else {
+        iconoMenu.classList.replace("bx-x", "bx-menu")
+    }
+})
+
+enlacesMenu.forEach(enlace => {
+    enlace.addEventListener("click", () => {
+        menuDashboard.classList.add("open")
+        iconoMenu.classList.replace("bx-menu", "bx-x")
+    })
+})
+    </script>
+
+<script>
+  // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Botón para alternar modo oscuro
+  document.getElementById('modoOscuroBtn').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+  });
+</script>
+    
+</body>
+</html>

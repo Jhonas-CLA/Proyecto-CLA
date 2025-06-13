@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            width: 280px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-align: center;
+            border: 2px solid #007bff;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .imagen {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .nombre {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .descripcion {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .precio {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .no-productos {
+            text-align: center;
+            font-size: 18px;
+            color: #999;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+{% load static %}
+
+{% load static %}
+
+<body>
+    <h1>🛒 Lista de Productos</h1>
+
+    {% if productos %}
+    <div class="contenedor">
+        {% for producto in productos %}
+            {% if producto.imagen %}
+                <div class="card">
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    <div class="contenido">
+                        <h2>{{ producto.nombre }}</h2>
+                        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+                        <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
+                        <p><strong>Precio:</strong> $ {{ producto.precio|floatformat:2 }}</p>
+                        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No hay productos disponibles.</p>
+    {% endif %}
+</body>
+
+
+</html>
