@@ -1,0 +1,647 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios - Eléctricos & Soluciones</title>
+
+    <!-- Estilos externos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- Fuentes y variables -->
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+    :root{
+        --blanco:#E0E0E0;
+        --azul-opacidad:#184463;
+        --bg-menu:#003053;
+        --bg-body:#C7E1FF;
+        --w-menu-cerrado:150px;
+        --w-menu-abierto:300px;
+    }
+
+    /* Reset básico */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+        font-family:'Quicksand',sans-serif;
+        background:var(--bg-body);
+        color:var(--blanco);
+    }
+
+    /* Sidebar */
+    .menu-dashboard{
+        position:fixed;
+        top:0;left:0;
+        width:var(--w-menu-cerrado);
+        height:100vh;
+        background:var(--bg-menu);
+        padding:20px;
+        transition:width .3s ease;
+        z-index:1000;
+    }
+
+    .menu-dashboard.open{width:var(--w-menu-abierto);}
+
+    .menu-dashboard .logo span{
+        margin-bottom: 10%;
+    }
+
+    .top-menu{display:flex;align-items:center;justify-content:space-between;}
+    .top-menu .logo{display:flex;align-items:center;}
+    .top-menu .logo img{width:40px;transition:width .3s ease;}
+    .top-menu .logo span{font-size:20px;margin-left:20px;display:none;}
+    .menu-dashboard.open .top-menu .logo span{display:block;}
+
+    .toggle{cursor:pointer;display:flex;align-items:center;}
+    .toggle i{font-size:35px;}
+
+    .input-search{
+        width:100%;margin:50px 0;
+        background:var(--azul-opacidad);
+        padding:15px;border-radius:8px;
+        display:flex;align-items:center;
+    }
+    .input-search i{font-size:30px;margin-right:20px;}
+    .input-search .input{
+        border:none;background:transparent;
+        width:100%;height:30px;
+        font-size:22px;color:var(--blanco);
+        display:none;
+        outline:none;
+    }
+    .input-search .input::placeholder{color:var(--blanco);opacity:0.7;}
+    .menu-dashboard.open .input-search .input{display:block;}
+
+    /* Enlaces */
+    .menu .enlace{
+        display:flex;align-items:center;
+        padding:20px 0 20px 17px;
+        margin-bottom:20px;
+        border-radius:8px;
+        font-size:20px;
+        color:#fff;text-decoration:none;
+        transition:all .3s ease;
+    }
+    .menu .enlace:hover{background:var(--azul-opacidad);}
+    .menu .enlace i{font-size:25px;margin-right:20px;}
+    .menu .enlace span{opacity:0;transition:opacity .3s ease;}
+    .menu-dashboard.open .menu .enlace span{opacity:1;}
+
+    /* Contenido principal */
+    .contenido-principal{
+        margin-left:var(--w-menu-cerrado);
+        padding:30px;
+        min-height:100vh;
+        background:#fff;
+        color:#333;
+        transition:margin-left .3s ease;
+    }
+    .menu-dashboard.open + .contenido-principal{
+        margin-left:var(--w-menu-abierto);
+    }
+
+    /* Estilos para usuarios */
+    .usuarios-table {
+        background: #2c3e50;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .usuarios-table table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+    }
+
+    .usuarios-table th {
+        background: #34495e;
+        color: #ecf0f1;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        border: none;
+    }
+
+    .usuarios-table td {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 12px 15px;
+        border: none;
+        border-bottom: 1px solid #34495e;
+    }
+
+    .usuarios-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .usuarios-table tbody tr:hover {
+        background: #34495e;
+    }
+
+    .btn-accion {
+        padding: 6px 12px;
+        margin-right: 5px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 14px;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .btn-editar {
+        background: #3498db;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background: #2980b9;
+        color: white;
+    }
+
+    .btn-eliminar {
+        background: #e74c3c;
+        color: white;
+    }
+
+    .btn-eliminar:hover {
+        background: #c0392b;
+        color: white;
+    }
+
+    .btn-agregar {
+        background: #3498db;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-agregar:hover {
+        background: #2980b9;
+        color: white;
+    }
+
+    .titulo-seccion {
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
+
+    /* Modal styles */
+    .modal-content {
+        border-radius: 10px;
+    }
+
+    .modal-header {
+        background: var(--bg-menu);
+        color: white;
+        border-radius: 10px 10px 0 0;
+    }
+
+    /* Inputs */
+    .form-control, .form-select {
+        color: black !important;
+        background-color: white !important;
+    }
+
+    .form-control::placeholder {
+        color: #666 !important;
+        opacity: 1 !important;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--bg-menu);
+        box-shadow: 0 0 0 0.2rem rgba(0, 48, 83, 0.25);
+        color: black !important;
+        background-color: white !important;
+    }
+
+    /* Labels */
+    label {
+        color: black !important;
+        font-weight: 500;
+    }
+
+    /* Select y opciones */
+    select.form-select option {
+        color: black !important;
+    }
+
+    /* Mensaje de éxito */
+    .alert-success-custom {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1050;
+        min-width: 300px;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s ease;
+    }
+
+    .alert-success-custom.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
+    }
+   
+    </style>
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="menu-dashboard">
+    <div class="top-menu">
+        <div class="logo">
+            <img src="{% static 'img/logo.svg' %}" alt="">
+            <span>Electricos & Soluciones</span>
+        </div>
+        <div class="toggle"><i class='bx bx-menu'></i></div>
+    </div>
+    
+    <div class="menu">
+        <a href="{% url 'gestionUsuario' %}" class="enlace"><i class="bx bx-user"></i><span>Usuarios</span></a>
+        <a href="{% url 'proveedores_list' %}" class="enlace"><i class="bx bx-group"></i><span>Proveedores</span></a>
+        <a href="{% url 'analiticas' %}" class="enlace"><i class="bx bx-bar-chart-alt-2"></i><span>Analíticas</span></a>
+        <a href="#" class="enlace"><i class="bx bx-cart"></i><span>Pedidos</span></a>
+        <a href="{% url 'configuracion' %}" class="enlace"><i class="bx bx-cog"></i><span>Configuración</span></a>
+        <a href="{% url 'home' %}" class="enlace"><i class="bx bx-log-out"></i><span>Salir</span></a>
+    </div>
+</nav>
+
+<!-- CONTENIDO -->
+<main class="contenido-principal">
+    <div class="container-fluid">
+        <h2 class="titulo-seccion">Gestión de Usuarios</h2>
+        
+        <a href="#" class="btn-agregar" data-bs-toggle="modal" data-bs-target="#modalUsuario" onclick="limpiarFormulario()">
+            <i class="bx bx-plus"></i> Agregar nuevo usuario
+        </a>
+
+        <div class="usuarios-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaUsuarios">
+                    <!-- Los usuarios se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<!-- Modal para agregar/editar usuario -->
+<div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="modalUsuarioLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUsuarioLabel">Agregar Usuario</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formUsuario">
+                    <div class="mb-3">
+                        <label for="usuario" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="usuario" placeholder="Ingrese el nombre de usuario" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="usuario@ejemplo.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol" class="form-label">Rol</label>
+                        <select class="form-select" id="rol" required>
+                            <option value="">Seleccionar rol</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Vendedor">Vendedor</option>
+                            <option value="Almacenista">Almacenista</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" required>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarUsuario()" style="background: var(--bg-menu); border-color: var(--bg-menu);">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alerta de notificación -->
+<div id="alertaNotificacion" class="alert alert-success alert-success-custom d-flex align-items-center" role="alert">
+    <i class="bx bx-check-circle me-2"></i>
+    <div id="alertaTexto">Usuario guardado exitosamente</div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* Variables globales */
+let usuarios = [];
+let usuarioEditando = -1;
+const STORAGE_KEY = 'usuarios_dashboard';
+
+/* Funciones de persistencia */
+function cargarUsuarios() {
+    try {
+        const usuariosGuardados = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        
+        // Si no hay usuarios guardados, crear usuarios por defecto
+        if (usuariosGuardados.length === 0) {
+            usuarios = [
+                {
+                    id: 1,
+                    usuario: 'admin',
+                    email: 'admin@electricos.com',
+                    rol: 'Administrador',
+                    estado: 'activo',
+                    fechaCreacion: new Date().toLocaleDateString('es-ES')
+                },
+                {
+                    id: 2,
+                    usuario: 'maria',
+                    email: 'maria@electricos.com',
+                    rol: 'Vendedor',
+                    estado: 'activo',
+                    fechaCreacion: new Date().toLocaleDateString('es-ES')
+                }
+            ];
+            guardarUsuariosEnStorage();
+        } else {
+            usuarios = usuariosGuardados;
+        }
+        
+        actualizarTabla();
+        console.log('Usuarios cargados:', usuarios.length);
+    } catch (error) {
+        console.error('Error al cargar usuarios:', error);
+        mostrarAlerta('Error al cargar usuarios', 'error');
+    }
+}
+
+function guardarUsuariosEnStorage() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(usuarios));
+        console.log('Usuarios guardados en localStorage');
+    } catch (error) {
+        console.error('Error al guardar usuarios:', error);
+        mostrarAlerta('Error al guardar datos', 'error');
+    }
+}
+
+function obtenerSiguienteId() {
+    if (usuarios.length === 0) return 1;
+    return Math.max(...usuarios.map(u => u.id || 0)) + 1;
+}
+
+/* Funciones de validación */
+function validarEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+function validarUsuarioUnico(usuario, excludeId = null) {
+    return !usuarios.some(u => u.usuario.toLowerCase() === usuario.toLowerCase() && u.id !== excludeId);
+}
+
+function validarEmailUnico(email, excludeId = null) {
+    return !usuarios.some(u => u.email.toLowerCase() === email.toLowerCase() && u.id !== excludeId);
+}
+
+/* Toggle sidebar */
+const toggle = document.querySelector('.toggle');
+const sidebar = document.querySelector('.menu-dashboard');
+const icon = toggle.querySelector('i');
+
+toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    icon.classList.toggle('bx-x');
+    icon.classList.toggle('bx-menu');
+});
+
+/* Funciones CRUD de usuarios */
+function limpiarFormulario() {
+    document.getElementById('modalUsuarioLabel').textContent = 'Agregar Usuario';
+    document.getElementById('formUsuario').reset();
+    usuarioEditando = -1;
+    
+    // Limpiar estilos de validación
+    document.querySelectorAll('.form-control, .form-select').forEach(input => {
+        input.classList.remove('is-invalid', 'is-valid');
+    });
+}
+
+function editarUsuario(id) {
+    const usuario = usuarios.find(u => u.id === id);
+    if (!usuario) {
+        mostrarAlerta('Usuario no encontrado', 'error');
+        return;
+    }
+    
+    document.getElementById('modalUsuarioLabel').textContent = 'Editar Usuario';
+    document.getElementById('usuario').value = usuario.usuario;
+    document.getElementById('email').value = usuario.email;
+    document.getElementById('rol').value = usuario.rol;
+    document.getElementById('estado').value = usuario.estado;
+    usuarioEditando = id;
+}
+
+function guardarUsuario() {
+    const usuario = document.getElementById('usuario').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const rol = document.getElementById('rol').value;
+    const estado = document.getElementById('estado').value;
+
+    // Validaciones
+    if (!usuario || !email || !rol || !estado) {
+        mostrarAlerta('Por favor complete todos los campos', 'error');
+        return;
+    }
+
+    if (!validarEmail(email)) {
+        mostrarAlerta('Por favor ingrese un email válido', 'error');
+        return;
+    }
+
+    // Validar email único (excluyendo el usuario que se está editando)
+    if (!validarEmailUnico(email, usuarioEditando)) {
+        mostrarAlerta('El email ya está registrado', 'error');
+        return;
+    }
+
+    // Validar usuario único (excluyendo el usuario que se está editando)
+    if (!validarUsuarioUnico(usuario, usuarioEditando)) {
+        mostrarAlerta('El nombre de usuario ya existe', 'error');
+        return;
+    }
+
+    const nuevoUsuario = {
+        usuario, 
+        email, 
+        rol, 
+        estado,
+        fechaCreacion: new Date().toLocaleDateString('es-ES')
+    };
+
+    if (usuarioEditando !== -1) {
+        // Editar usuario existente
+        const index = usuarios.findIndex(u => u.id === usuarioEditando);
+        if (index !== -1) {
+            usuarios[index] = { ...usuarios[index], ...nuevoUsuario };
+            mostrarAlerta('Usuario actualizado exitosamente', 'success');
+        }
+    } else {
+        // Agregar nuevo usuario
+        nuevoUsuario.id = obtenerSiguienteId();
+        usuarios.push(nuevoUsuario);
+        mostrarAlerta('Usuario agregado exitosamente', 'success');
+    }
+
+    // Guardar en localStorage
+    guardarUsuariosEnStorage();
+    actualizarTabla();
+    
+    // Cerrar modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalUsuario'));
+    modal.hide();
+    
+    limpiarFormulario();
+}
+
+function eliminarUsuario(id) {
+    const usuario = usuarios.find(u => u.id === id);
+    if (!usuario) {
+        mostrarAlerta('Usuario no encontrado', 'error');
+        return;
+    }
+
+    if (confirm(`¿Está seguro de que desea eliminar al usuario "${usuario.usuario}"?`)) {
+        usuarios = usuarios.filter(u => u.id !== id);
+        guardarUsuariosEnStorage();
+        actualizarTabla();
+        mostrarAlerta('Usuario eliminado exitosamente', 'success');
+    }
+}
+
+function actualizarTabla() {
+    const tbody = document.getElementById('tablaUsuarios');
+    
+    tbody.innerHTML = '';
+    
+    if (usuarios.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center py-4">
+                    No hay usuarios registrados
+                </td>
+            </tr>
+        `;
+        return;
+    }
+    
+    usuarios.forEach((usuario) => {
+        const estadoBadge = usuario.estado === 'activo' 
+            ? '<span class="badge bg-success">Activo</span>' 
+            : '<span class="badge bg-danger">Inactivo</span>';
+            
+        const fila = `
+            <tr>
+                <td>${usuario.usuario}</td>
+                <td>${usuario.email}</td>
+                <td>${usuario.rol}</td>
+                <td>${estadoBadge}</td>
+                <td>
+                    <a href="#" class="btn-accion btn-editar" onclick="editarUsuario(${usuario.id})" data-bs-toggle="modal" data-bs-target="#modalUsuario">
+                        <i class="bx bx-edit"></i> Editar
+                    </a>
+                    <a href="#" class="btn-accion btn-eliminar" onclick="eliminarUsuario(${usuario.id})">
+                        <i class="bx bx-trash"></i> Eliminar
+                    </a>
+                </td>
+            </tr>
+        `;
+        tbody.innerHTML += fila;
+    });
+}
+
+/* Funcionalidad de búsqueda */
+document.querySelector('.input').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const filas = document.querySelectorAll('#tablaUsuarios tr');
+    
+    filas.forEach(fila => {
+        // Excluir la fila de "No hay usuarios registrados"
+        if (fila.children.length === 1) return;
+        
+        const texto = fila.textContent.toLowerCase();
+        if (texto.includes(searchTerm)) {
+            fila.style.display = '';
+        } else {
+            fila.style.display = 'none';
+        }
+    });
+});
+
+/* Función para mostrar alertas */
+function mostrarAlerta(mensaje, tipo = 'success') {
+    const alerta = document.getElementById('alertaNotificacion');
+    const alertaTexto = document.getElementById('alertaTexto');
+    
+    // Cambiar clases según el tipo
+    alerta.className = `alert alert-success-custom d-flex align-items-center`;
+    if (tipo === 'error') {
+        alerta.classList.add('alert-error');
+        alerta.querySelector('i').className = 'bx bx-error-circle me-2';
+    } else {
+        alerta.querySelector('i').className = 'bx bx-check-circle me-2';
+    }
+    
+    alertaTexto.textContent = mensaje;
+    
+    alerta.classList.add('show');
+    
+    setTimeout(() => {
+        alerta.classList.remove('show');
+    }, 3000);
+}
+
+/* Inicialización */
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Inicializando gestión de usuarios...');
+    
+    // Cargar usuarios desde localStorage
+    cargarUsuarios();
+    
+    console.log('Gestión de usuarios inicializada correctamente');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agregar Proveedor</title>
+  <style>
+    body {
+      font-size: calc(1rem + 0.3vw);
+      background-color: white;
+      color: black;
+      transition: background-color 0.5s, color 0.5s;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      font-size: calc(1.8rem + 0.8vw);
+      text-align: center;
+      margin-top: 40px;
+      color: white;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 60px auto 100px auto;
+      padding: 20px 30px;
+      background-color: #04208f;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-group {
+      width: 90%;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: white;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    button {
+      padding: 10px 30px;
+      background-color: white;
+      color: #04208f;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #dce2f3;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      color: #cfdcff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .form-container {
+        margin: 40px 15px;
+        padding: 20px;
+      }
+
+      .form-group {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #121212 !important;
+      color: #e0e0e0;
+    }
+
+    .dark-mode .form-container {
+      background-color: #1f1f1f !important;
+    }
+
+    .dark-mode h2,
+    .dark-mode label {
+      color: #e0e0e0;
+    }
+
+    .dark-mode input,
+    .dark-mode textarea,
+    .dark-mode select {
+      background-color: #333 !important;
+      color: #e0e0e0 !important;
+      border-color: #555;
+    }
+
+    .dark-mode a {
+      color: #90caf9;
+    }
+
+    .dark-mode button {
+      background-color: #2196f3;
+      color: white;
+    }
+
+    .dark-mode button:hover {
+      background-color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Agregar Proveedor</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.errors %}
+            <div style="color: yellow;">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <div class="btn-container">
+        <button type="submit">Guardar</button>
+      </div>
+    </form>
+    <a href="{% url 'proveedores_list' %}">Volver a la lista</a>
+  </div>
+  <script>
+  // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Botón para alternar modo oscuro
+  document.getElementById('modoOscuroBtn').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+  });
+</script>
+
+  
+  
+</body>
+</html>

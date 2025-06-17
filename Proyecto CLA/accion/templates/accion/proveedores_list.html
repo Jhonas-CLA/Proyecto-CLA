@@ -1,0 +1,502 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Proveedores</title>
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <script src="{% static 'js/app.js' %}" defer></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+        :root {
+            --blanco: #E0E0E0;
+            --azul-opacidad: #184463;
+            --bg-menu: #003053;
+            --bg-body: #C7E1FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--blanco);
+        }
+
+        .menu-dashboard {
+            width: 150px;
+            height: 100vh;
+            background: var(--bg-menu);
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: max-width 0.3s ease;
+        }
+
+        .menu-dashboard.open {
+            width: 300px;
+        }
+
+        .top-menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 40px;
+        }
+
+        .logo span {
+            font-size: 20px;
+            margin-left: 15px;
+            display: none;
+        }
+
+        .menu-dashboard.open .logo span {
+            display: block;
+        }
+
+        .toggle {
+            cursor: pointer;
+        }
+
+        .toggle i {
+            font-size: 35px;
+        }
+
+        .menu {
+            margin-top: 30px;
+        }
+
+        .enlace {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .enlace i {
+            font-size: 22px;
+            margin-right: 15px;
+        }
+
+        .enlace:hover {
+            background-color: var(--azul-opacidad);
+        }
+
+        .main-content {
+            margin-left: 180px;
+            padding: 30px;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .main-content h1 {
+            margin-bottom: 20px;
+            color: #003053;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-success { background-color: #003053; }
+        .btn-danger { background-color: #003053; }
+        .btn-primary {
+            background-color: #003053;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .main-content {
+            background-color: #1f1f1f !important;
+            color: white;
+        }
+
+        .dark-mode .main-content h1{
+            color: #0d6efd;
+        }
+
+        .dark-mode table {
+            background-color: #2c2c2c;
+            color: white;
+        }
+
+        .dark-mode th {
+            background-color: #444;
+        }
+
+        .dark-mode .btn-primary{
+            background-color: #003053;
+        }
+
+        .dark-mode input, .dark-mode textarea, .dark-mode select {
+            background-color: #333;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+:root {
+    --blanco: #E0E0E0;
+    --azul-opacidad: #184463;
+    --bg-menu: #003053;
+    --bg-body: #C7E1FF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--blanco);
+}
+
+.menu-dashboard {
+    max-width: 150px;
+    height: 100vh;
+    background: var(--bg-menu);
+    padding: 20px;
+    transition: max-width .3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.menu-dashboard .logo span{
+    margin-bottom: 10%;
+}
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-menu .logo {
+    display: flex;
+    align-items: center;
+}
+
+.top-menu .logo img {
+    width: 40px;
+    transition: width .3s ease;
+}
+
+.top-menu .logo span {
+    font-size: 20px;
+    margin-left: 20px;
+    display: none;
+}
+
+.top-menu .toggle {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.top-menu .toggle i {
+    font-size: 35px;
+}
+
+.input-search {
+    width: 100%;
+    margin: 50px 0;
+    background-color: var(--azul-opacidad);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.input-search i {
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+.input-search .input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    height: 30px;
+    color: var(--blanco);
+    font-size: 22px;
+    display: none;
+}
+
+.menu .enlace {
+    width: 100%;
+    padding: 20px 0 20px 17px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all .3s ease;
+    text-decoration: none;
+    color: white;
+}
+
+.menu .enlace:hover {
+    background: var(--azul-opacidad);
+}
+
+.menu .enlace i {
+    margin-right: 20px;
+    font-size: 25px;
+}
+
+.menu .enlace span {
+    opacity: 0;
+    transition: opacity .3s ease;
+    color: white;
+}
+
+.menu-dashboard.open .menu .enlace span {
+    opacity: 1;
+}
+
+.menu .enlace:visited,
+.menu .enlace:link,
+.menu .enlace:active {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-dashboard.open {
+    max-width: 300px;
+    color: white;
+}
+
+.menu-dashboard.open .top-menu .logo span {
+    display: block;
+}
+
+.menu-dashboard.open .input-search,
+.menu-dashboard.open .menu .enlace {
+    width: auto;
+}
+
+.menu-dashboard.open .input-search .input {
+    display: block;
+}
+
+.menu-dashboard.open .menu .enlace {
+    padding: 20px;
+}
+
+.menu-dashboard.open .menu .enlace span {
+    opacity: 1;
+}
+
+/* ESTILOS ADICIONALES PARA EL CONTENIDO PRINCIPAL */
+
+.contenido-principal {
+    margin-left: 180px;
+    padding: 30px;
+    background-color: #fff;
+    min-height: 100vh;
+    color: #333;
+}
+
+.contenido-principal h1,
+.contenido-principal h2 {
+    margin-bottom: 20px;
+    color: #003053;
+}
+
+.contenido-principal p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contenido-principal form {
+    margin-top: 20px;
+}
+
+.contenido-principal form input,
+.contenido-principal form select,
+.contenido-principal form textarea {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.contenido-principal button {
+    padding: 10px 20px;
+    background-color: #003053;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.contenido-principal button:hover {
+    background-color: #184463;
+}
+
+
+    </style>
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <div class="menu-dashboard">
+        <div class="top-menu">
+            <div class="logo">
+                <img src="{% static 'img/logo.svg' %}" alt="">
+                <span>Electricos & Soluciones</span>
+            </div>
+            <div class="toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+
+        <div class="menu">
+            <a href="{% url 'gestionUsuario' %}" class="enlace"><i class="bx bx-user"></i><span>Usuarios</span></a>
+            <a href="{% url 'proveedores_list' %}" class="enlace"><i class="bx bx-group"></i><span>Proveedores</span></a>
+            <a href="{% url 'analiticas' %}" class="enlace"><i class="bx bx-bar-chart-alt-2"></i><span>Analiticas</span></a>
+            <a href="#" class="enlace"><i class="bx bx-cart"></i><span>Pedidos</span></a>
+            <a href="{% url 'configuracion' %}" class="enlace"><i class="bx bx-cog"></i><span>Configuración</span></a>
+            <a href="{% url 'home' %}" class="enlace"><i class="bx bx-run"></i><span>Salir</span></a>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        <h1>Listado de Proveedores</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Dirección</th>
+                    <th>Contacto</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proveedor in proveedores %}
+                <tr>
+                    <td>{{ proveedor.nombre }}</td>
+                    <td>{{ proveedor.direccion }}</td>
+                    <td>{{ proveedor.contacto }}</td>
+                    <td>{{ proveedor.estado }}</td>
+                    <td>
+                        <a href="{% url 'editar_proveedor' proveedor.pk %}" class="btn btn-success">Editar</a>
+                        <a href="{% url 'eliminar_proveedor' proveedor.pk %}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'agregar_proveedor' %}" class="btn btn-primary">Agregar nuevo proveedor</a>
+    </div>
+<script>
+        const toggle = document.querySelector(".toggle")
+const menuDashboard = document.querySelector(".menu-dashboard")
+const iconoMenu = toggle.querySelector("i")
+const enlacesMenu = document.querySelectorAll(".enlace")
+
+toggle.addEventListener("click", () => {
+    menuDashboard.classList.toggle("open")
+
+    if(iconoMenu.classList.contains("bx-menu")){
+        iconoMenu.classList.replace("bx-menu", "bx-x")
+    }else {
+        iconoMenu.classList.replace("bx-x", "bx-menu")
+    }
+})
+
+enlacesMenu.forEach(enlace => {
+    enlace.addEventListener("click", () => {
+        menuDashboard.classList.add("open")
+        iconoMenu.classList.replace("bx-menu", "bx-x")
+    })
+})
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const btnEditar = document.getElementById("btnEditar");
+    const formulario = document.getElementById("formularioActualizar");
+
+    btnEditar.addEventListener("click", function () {
+        formulario.style.display = "block"; // muestra el formulario
+        btnEditar.style.display = "none"; // oculta el botón de editar
+    });
+});
+</script>
+
+    <script>
+  // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Botón para alternar modo oscuro
+  document.getElementById('modoOscuroBtn').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+  });
+</script>
+    
+</body>
+</html>
