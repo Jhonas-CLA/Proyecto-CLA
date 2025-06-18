@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agregar Proveedor</title>
+
+
+  <style>
+  * {
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+  }
+
+  body {
+    font-size: calc(1rem + 0.3vw);
+    background-color: #f4f6fa;
+    color: #222;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s, color 0.5s;
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 50px;
+    color: #04208f;
+    animation: fadeInDown 0.8s ease-out;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-container {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 40px;
+    background: linear-gradient(135deg, #04208f, #061a6f);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    animation: fadeInUp 0.9s ease;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 1rem;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f8f8f8;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(4, 32, 143, 0.4);
+    transform: scale(1.02);
+    border-color: #04208f;
+  }
+
+  .btn-container {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  button {
+    padding: 14px 40px;
+    background-color: #ffffff;
+    color: #04208f;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #e6edff;
+    transform: translateY(-2px);
+  }
+
+  a {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    color: #e0eaff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: #ffffff;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .form-container {
+      margin: 40px 20px;
+      padding: 30px;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+
+  /* Modo oscuro */
+  body.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+  }
+
+  .dark-mode .form-container {
+    background: linear-gradient(135deg, #2b2b2b, #1f1f1f);
+  }
+
+  .dark-mode h2 {
+    color: #0d6efd;
+  }
+
+  .dark-mode label {
+    color: #f0f0f0;
+  }
+
+  .dark-mode input,
+  .dark-mode textarea,
+  .dark-mode select {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+  }
+
+  .dark-mode a {
+    color: #0d6efd;
+  }
+
+  .dark-mode button {
+    background-color: #2196f3;
+    color: white;
+  }
+
+  .dark-mode button:hover {
+    background-color: #1976d2;
+  }
+
+  /* Animaciones */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+</head>
+<body>
+  <div class="form-container">
+    <h2>Agregar Proveedor</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.errors %}
+            <div style="color: yellow;">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <div class="btn-container">
+        <button type="submit">Guardar</button>
+      </div>
+    </form>
+    <a href="{% url 'proveedores_list' %}">Volver a la lista</a>
+  </div>
+  <script>
+  // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Botón para alternar modo oscuro
+  document.getElementById('modoOscuroBtn').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+  });
+</script>
+
+  
+  
+</body>
+</html>

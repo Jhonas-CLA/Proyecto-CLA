@@ -1,0 +1,486 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Usuarios</title>
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <script src="{% static 'js/app.js' %}" defer></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+:root {
+    --blanco: #E0E0E0;
+    --azul-opacidad: #184463;
+    --bg-menu: #003053;
+    --bg-body: #C7E1FF;
+    --acento: #00AEEF;
+    --sombra: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--blanco);
+    transition: background-color 0.3s ease;
+}
+
+.menu-dashboard {
+    max-width: 150px;
+    height: 100vh;
+    background: var(--bg-menu);
+    padding: 20px;
+    transition: max-width .3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0 8px var(--sombra);
+    overflow-x: hidden;
+}
+
+.menu-dashboard.open {
+    max-width: 300px;
+}
+
+.logo img {
+    width: 40px;
+    transition: 0.3s;
+}
+
+.logo span {
+    font-size: 20px;
+    margin-left: 15px;
+    display: none;
+    transition: opacity 0.3s;
+}
+
+.menu-dashboard.open .logo span {
+    display: inline-block;
+    opacity: 1;
+}
+
+.toggle {
+    cursor: pointer;
+    color: white;
+}
+
+.toggle i {
+    font-size: 30px;
+    transition: transform 0.3s;
+}
+
+.menu {
+    margin-top: 30px;
+}
+
+.enlace {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    gap: 10px;
+}
+
+.enlace i {
+    font-size: 22px;
+}
+
+.enlace:hover {
+    background-color: var(--azul-opacidad);
+    transform: translateX(5px);
+}
+
+.main-content {
+    margin-left: 180px;
+    padding: 40px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    color: #333;
+    transition: margin-left 0.3s;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.main-content h1 {
+    margin-bottom: 30px;
+    color: #003053;
+    font-weight: 600;
+    font-size: 32px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 8px var(--sombra);
+    border-radius: 10px;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    font-weight: 600;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-success {
+    background-color: var(--acento);
+}
+
+.btn-primary {
+    background-color: #003053;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+/* Inputs, selects, dark mode, etc */
+input, select, textarea {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 4px var(--acento);
+}
+
+/* Animaciones para interacciones */
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Dark mode opcional */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .main-content {
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.dark-mode table {
+    background-color: #2c2c2c;
+    color: white;
+}
+
+.dark-mode th {
+    background-color: #444;
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+    background-color: #333;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+.menu-dashboard {
+    max-width: 150px;
+    height: 100vh;
+    background: var(--bg-menu);
+    padding: 20px;
+    transition: max-width .3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.menu-dashboard .logo span{
+    margin-bottom: 10%;
+}
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-menu .logo {
+    display: flex;
+    align-items: center;
+}
+
+.top-menu .logo img {
+    width: 40px;
+    transition: width .3s ease;
+}
+
+.top-menu .logo span {
+    font-size: 20px;
+    margin-left: 20px;
+    display: none;
+}
+
+.top-menu .toggle {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.top-menu .toggle i {
+    font-size: 35px;
+}
+
+.input-search {
+    width: 100%;
+    margin: 50px 0;
+    background-color: var(--azul-opacidad);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.input-search i {
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+.input-search .input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    height: 30px;
+    color: var(--blanco);
+    font-size: 22px;
+    display: none;
+}
+
+.menu .enlace {
+    width: 100%;
+    padding: 20px 0 20px 17px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all .3s ease;
+    text-decoration: none;
+    color: white;
+}
+
+.menu .enlace:hover {
+    background: var(--azul-opacidad);
+}
+
+.menu .enlace i {
+    margin-right: 20px;
+    font-size: 25px;
+}
+
+.menu .enlace span {
+    opacity: 0;
+    transition: opacity .3s ease;
+    color: white;
+}
+
+.menu .enlace:visited,
+.menu .enlace:link,
+.menu .enlace:active {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-dashboard.open {
+    max-width: 300px;
+    color: white;
+}
+
+.menu-dashboard.open .top-menu .logo span {
+    display: block;
+}
+
+.menu-dashboard.open .input-search,
+.menu-dashboard.open .menu .enlace {
+    width: auto;
+}
+
+.menu-dashboard.open .input-search .input {
+    display: block;
+}
+
+.menu-dashboard.open .menu .enlace {
+    padding: 20px;
+}
+
+.menu-dashboard.open .menu .enlace span {
+    opacity: 1;
+}
+
+.dark-mode .main-content h1{
+    color: #0d6efd;
+}
+
+.dark-mode th{
+    color: #0d6efd;
+}
+</style>
+
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <div class="menu-dashboard">
+        <div class="top-menu">
+            <div class="logo">
+                <img src="{% static 'img/logo.svg' %}" alt="">
+                <span>Electricos & Soluciones</span>
+            </div>
+            <div class="toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+
+        <div class="menu">
+            <a href="{% url 'usuarios_list' %}" class="enlace"><i class="bx bx-user"></i><span>Usuarios</span></a>
+            <a href="{% url 'proveedores_list' %}" class="enlace"><i class="bx bx-group"></i><span>Proveedores</span></a>
+            <a href="{% url 'analiticas' %}" class="enlace"><i class="bx bx-bar-chart-alt-2"></i><span>Analiticas</span></a>
+            <a href="#" class="enlace"><i class="bx bx-cart"></i><span>Pedidos</span></a>
+            <a href="{% url 'configuracion' %}" class="enlace"><i class="bx bx-cog"></i><span>Configuración</span></a>
+            <a href="{% url 'home' %}" class="enlace"><i class="bx bx-run"></i><span>Salir</span></a>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+<div class="main-content">
+    <h1>Listado de Usuarios</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Estado</th> <!-- Nuevo -->
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.nombre_completo }}</td>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.get_rol_display }}</td>
+                <td>
+                    {% if usuario.estado == "activo" %}
+                        <span style="color: green; font-weight: bold;">Activo</span>
+                    {% else %}
+                        <span style="color: red; font-weight: bold;">Inactivo</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'editar_usuario' usuario.pk %}" class="btn btn-success">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'agregar_usuario' %}" class="btn btn-primary">Agregar nuevo usuario</a>
+</div>
+
+<script>
+        const toggle = document.querySelector(".toggle")
+const menuDashboard = document.querySelector(".menu-dashboard")
+const iconoMenu = toggle.querySelector("i")
+const enlacesMenu = document.querySelectorAll(".enlace")
+
+toggle.addEventListener("click", () => {
+    menuDashboard.classList.toggle("open")
+
+    if(iconoMenu.classList.contains("bx-menu")){
+        iconoMenu.classList.replace("bx-menu", "bx-x")
+    }else {
+        iconoMenu.classList.replace("bx-x", "bx-menu")
+    }
+})
+
+enlacesMenu.forEach(enlace => {
+    enlace.addEventListener("click", () => {
+        menuDashboard.classList.add("open")
+        iconoMenu.classList.replace("bx-menu", "bx-x")
+    })
+})
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const btnEditar = document.getElementById("btnEditar");
+    const formulario = document.getElementById("formularioActualizar");
+
+    btnEditar.addEventListener("click", function () {
+        formulario.style.display = "block"; // muestra el formulario
+        btnEditar.style.display = "none"; // oculta el botón de editar
+    });
+});
+</script>
+
+    <script>
+  // Cargar el estado del modo oscuro al iniciar
+  if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Botón para alternar modo oscuro
+  document.getElementById('modoOscuroBtn').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+  });
+</script>
+    
+</body>
+</html>
