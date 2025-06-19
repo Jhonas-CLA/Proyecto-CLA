@@ -2,10 +2,6 @@ from django import forms
 from .models import Usuario
 from django.contrib.auth.hashers import make_password
 
-from django import forms
-from django.contrib.auth.hashers import make_password
-from .models import Usuario
-
 class UsuarioForm(forms.ModelForm):
     password1 = forms.CharField(
         label='Contraseña',

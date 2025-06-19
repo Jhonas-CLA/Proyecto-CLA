@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Configuración de Usuario</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section h3 {
+      color: #007bff;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .form-image {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-image img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #007bff;
+      object-fit: cover;
+    }
+
+    .btn {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background-color: #a71d2a;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Configuración de Usuario</h2>
+
+    <!-- Imagen de perfil -->
+    <div class="section">
+      <h3>Imagen de Perfil</h3>
+      <div class="form-image">
+        <img src="https://via.placeholder.com/120" alt="Perfil">
+      </div>
+      <div class="form-group">
+        <label for="imagen">Cambiar imagen</label>
+        <input type="file" id="imagen">
+      </div>
+    </div>
+
+    <!-- Datos personales -->
+    <div class="section">
+      <h3>Datos Personales</h3>
+      <div class="form-group">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" placeholder="Ej: Daniel Felipe">
+      </div>
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="Ej: daniel@email.com">
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="text" id="telefono" placeholder="Ej: 3001234567">
+      </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="section">
+      <h3>Seguridad</h3>
+      <div class="form-group">
+        <label for="password">Nueva contraseña</label>
+        <input type="password" id="password" placeholder="••••••••">
+      </div>
+      <div class="form-group">
+        <label for="confirmar">Confirmar contraseña</label>
+        <input type="password" id="confirmar" placeholder="••••••••">
+      </div>
+    </div>
+
+    <!-- Preferencias -->
+    <div class="section">
+      <h3>Preferencias</h3>
+      <div class="form-group">
+        <label for="tema">Tema</label>
+        <select id="tema">
+          <option value="claro">Claro</option>
+          <option value="oscuro">Oscuro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="idioma">Idioma</label>
+        <select id="idioma">
+          <option value="es">Español</option>
+          <option value="en">Inglés</option>
+          <option value="pt">Portugués</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="section">
+      <button type="button" class="btn">Guardar Cambios</button>
+    </div>
+
+    <!-- Eliminar cuenta -->
+    <div class="section">
+      <h3>Eliminar cuenta</h3>
+      <p style="color: #666;">¿Quieres eliminar tu cuenta? Esta acción no se puede deshacer.</p>
+      <button type="button" class="btn btn-danger">Eliminar Cuenta</button>
+    </div>
+  </div>
+
+</body>
+</html>

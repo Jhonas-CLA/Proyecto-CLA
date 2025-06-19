@@ -1,0 +1,507 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuración Administrador</title>
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <script src="{% static 'js/app.js' %}" defer></script>
+</head>
+<body>
+
+    <!-- DASHBOARD SIDEBAR -->
+    <div class="menu-dashboard">
+        <div class="top-menu">
+            <div class="logo">
+                <img src="{% static 'img/logo.svg' %}" alt="">
+                <span>Electricos & Soluciones</span>
+            </div>
+            <div class="toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+
+        <div class="menu">
+            <a href="{% url 'usuarios_list' %}" class="enlace"><i class="bx bx-user"></i><span>Usuarios</span></a>
+            <a href="{% url 'proveedores_list' %}" class="enlace"><i class="bx bx-group"></i><span>Proveedores</span></a>
+            <a href="{% url 'analiticas' %}" class="enlace"><i class="bx bx-bar-chart-alt-2"></i><span>Analiticas</span></a>
+            <a href="/productos/" class="enlace"><i class="bx bx-box"></i><span>Productos</span></a>
+            <a href="#" class="enlace"><i class="bx bx-cart"></i><span>Pedidos</span></a>
+            <a href="{% url 'configuracion' %}" class="enlace"><i class="bx bx-cog"></i><span>Configuración</span></a>
+            <a href="{% url 'home' %}" class="enlace"><i class="bx bx-run"></i><span>Salir</span></a>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        <div class="container">
+            <h2 class="titulo-seccion">Gestión de Productos</h2>
+            <a href="{% url 'agregar_producto' %}" class="btn-agregar mb-3">+ Agregar nuevo producto</a>
+            
+            <div class="usuarios-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Categoría</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in productos %}
+                            <tr>
+                                <td>
+                                    {% if producto.imagen %}
+                                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" style="width: 60px; height: auto; border-radius: 4px;">
+                                    {% else %}
+                                        <span class="sin-imagen">Sin imagen</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ producto.nombre }}</td>
+                                <td>{{ producto.descripcion }}</td>
+                                <td>{{ producto.categoria.nombre }}</td>
+                                <td>{{ producto.cantidad }}</td>
+                                <td>${{ producto.precio }}</td>
+                                <td>
+                                    <div class="acciones-container">
+                                        <a href="{% url 'editar_producto' producto.id %}" class="btn-accion btn-editar">Editar</a>
+                                        <a href="{% url 'eliminar_producto' producto.id %}" class="btn-accion btn-eliminar" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center">No hay productos disponibles.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+:root {
+    --blanco: #E0E0E0;
+    --azul-opacidad: #184463;
+    --bg-menu: #003053;
+    --bg-body: #C7E1FF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--blanco);
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ANIMACIONES */
+@keyframes slideIn {
+    from {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* SIDEBAR */
+.menu-dashboard {
+    width: 150px;
+    height: 100vh;
+    background: var(--bg-menu);
+    padding: 20px;
+    transition: width .4s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    animation: slideIn 0.5s ease;
+}
+
+.menu-dashboard .logo span{
+    margin-bottom: 10%;
+    animation: fadeIn 0.6s ease;
+}
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-menu .logo {
+    display: flex;
+    align-items: center;
+}
+
+.top-menu .logo img {
+    width: 40px;
+    transition: width .3s ease;
+    animation: fadeIn 0.5s ease;
+}
+
+.top-menu .logo span {
+    font-size: 20px;
+    margin-left: 20px;
+    display: none;
+}
+
+.top-menu .toggle {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.top-menu .toggle i {
+    font-size: 35px;
+}
+
+.input-search {
+    width: 100%;
+    margin: 50px 0;
+    background-color: var(--azul-opacidad);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+.input-search i {
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+.input-search .input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    height: 30px;
+    color: var(--blanco);
+    font-size: 22px;
+    display: none;
+    transition: all 0.4s ease;
+}
+
+.menu .enlace {
+    width: 100%;
+    padding: 20px 0 20px 17px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all .3s ease;
+    text-decoration: none;
+    color: white;
+    animation: fadeIn 0.6s ease;
+}
+
+.menu .enlace:hover {
+    background: var(--azul-opacidad);
+    transform: translateX(5px);
+}
+
+.menu .enlace i {
+    margin-right: 20px;
+    font-size: 25px;
+}
+
+.menu .enlace span {
+    opacity: 0;
+    transition: opacity .3s ease;
+    color: white;
+}
+
+.menu-dashboard.open .menu .enlace span {
+    opacity: 1;
+}
+
+.menu .enlace:visited,
+.menu .enlace:link,
+.menu .enlace:active {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-dashboard.open {
+    width: 300px;
+    color: white;
+}
+
+.menu-dashboard.open .top-menu .logo span {
+    display: block;
+}
+
+.menu-dashboard.open .input-search,
+.menu-dashboard.open .menu .enlace {
+    width: auto;
+}
+
+.menu-dashboard.open .input-search .input {
+    display: block;
+}
+
+.menu-dashboard.open .menu .enlace {
+    padding: 20px;
+}
+
+.menu-dashboard.open .menu .enlace span {
+    opacity: 1;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+    margin-left: 150px;
+    padding: 30px;
+    min-height: 100vh;
+    transition: margin-left 0.4s ease;
+    background-color: var(--bg-body);
+}
+
+.main-content.expanded {
+    margin-left: 300px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* ESTILOS PARA PRODUCTOS */
+.usuarios-table {
+    background: #2c3e50;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.usuarios-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.usuarios-table th {
+    background: #34495e;
+    color: #ecf0f1;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border: none;
+}
+
+.usuarios-table td {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 12px 15px;
+    border: none;
+    border-bottom: 1px solid #34495e;
+    vertical-align: middle;
+}
+
+.usuarios-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.usuarios-table tbody tr:hover {
+    background: #34495e;
+}
+
+.sin-imagen {
+    color: #95a5a6;
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* Contenedor de botones mejorado */
+.acciones-container {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.btn-accion {
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    min-width: 70px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-editar {
+    background: #3498db;
+    color: white;
+    border: 1px solid #3498db;
+}
+
+.btn-editar:hover {
+    background: #2980b9;
+    border-color: #2980b9;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-eliminar {
+    background: #e74c3c;
+    color: white;
+    border: 1px solid #e74c3c;
+}
+
+.btn-eliminar:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-agregar {
+    background: #27ae60;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-agregar:hover {
+    background: #229954;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.titulo-seccion {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+/* Ajuste para la columna de acciones */
+.usuarios-table th:last-child,
+.usuarios-table td:last-child {
+    width: 160px;
+    text-align: left;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    
+    .main-content.expanded {
+        margin-left: 0;
+    }
+    
+    .menu-dashboard {
+        transform: translateX(-100%);
+    }
+    
+    .menu-dashboard.open {
+        transform: translateX(0);
+    }
+    
+    .usuarios-table {
+        overflow-x: auto;
+    }
+    
+    .acciones-container {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .btn-accion {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+</style>
+
+<script>
+    const toggle = document.querySelector(".toggle");
+    const menuDashboard = document.querySelector(".menu-dashboard");
+    const mainContent = document.querySelector(".main-content");
+    const iconoMenu = toggle.querySelector("i");
+    const enlacesMenu = document.querySelectorAll(".enlace");
+
+    toggle.addEventListener("click", () => {
+        menuDashboard.classList.toggle("open");
+        mainContent.classList.toggle("expanded");
+
+        if(iconoMenu.classList.contains("bx-menu")){
+            iconoMenu.classList.replace("bx-menu", "bx-x");
+        } else {
+            iconoMenu.classList.replace("bx-x", "bx-menu");
+        }
+    });
+
+    enlacesMenu.forEach(enlace => {
+        enlace.addEventListener("click", () => {
+            menuDashboard.classList.add("open");
+            mainContent.classList.add("expanded");
+            iconoMenu.classList.replace("bx-menu", "bx-x");
+        });
+    });
+
+    // Cargar el estado del modo oscuro al iniciar (si existe)
+    if (localStorage.getItem('modoOscuro') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+
+    // Botón para alternar modo oscuro (si existe el botón)
+    const modoOscuroBtn = document.getElementById('modoOscuroBtn');
+    if (modoOscuroBtn) {
+        modoOscuroBtn.addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+        });
+    }
+</script>
+
+{% endblock %}

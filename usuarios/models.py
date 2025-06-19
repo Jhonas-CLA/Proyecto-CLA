@@ -18,6 +18,7 @@ class Usuario(models.Model):
     rol = models.CharField(max_length=20, choices=ROLES, default='usuario')
     estado = models.CharField(max_length=10, choices=ESTADOS, default='activo')
 
+
     def __str__(self):
         return f"{self.nombre_completo} ({self.rol})"
 

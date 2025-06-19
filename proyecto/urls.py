@@ -1,7 +1,7 @@
 """
 URL configuration for proyecto project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
+The urlpatterns list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
 Examples:
 Function views
@@ -30,5 +30,6 @@ urlpatterns = [
     path('usuarios/password_reset/', auth_views.PasswordResetView.as_view(template_name="accion/password_reset_confirm.html"), name='password_reset'),
     path('usuarios/password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name="accion/password_reset_done.html"), name='password_reset_done'),
     path('usuarios/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="accion/password_reset_form.html"), name='password_reset_confirm'),
-    path('usuarios/reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name="accion/password_reset_complete.html"), name='password_reset_complete'),         
+    path('usuarios/reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name="accion/password_reset_complete.html"), name='password_reset_complete'),      
+    path('productos/', include('productos.urls')), 
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

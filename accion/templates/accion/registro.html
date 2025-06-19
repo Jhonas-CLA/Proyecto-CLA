@@ -343,34 +343,50 @@
 {% endif %}
     <h1 style="color: #007AFF;">Registrate</h1>
     <form method="post" novalidate>
-      {% csrf_token %}
-      {{ form.non_field_errors }}
+  {% csrf_token %}
+  {{ form.non_field_errors }}
 
-      <div class="form-group">
-        {{ form.nombre_completo.label_tag }}
-        {{ form.nombre_completo }}
-      </div>
-      <div class="form-group">
-        {{ form.email.label_tag }}
-        {{ form.email }}
-      </div>
-      <div class="form-group">
-        {{ form.username.label_tag }}
-        {{ form.username }}
-      </div>
-      <div class="form-group">
-        {{ form.password1.label_tag }}
-        {{ form.password1 }}
-        <input type="checkbox" onclick="togglePassword('id_password1')"> Mostrar contraseña
-      </div>
-      <div class="form-group">
-        {{ form.password2.label_tag }}
-        {{ form.password2 }}
-        <input type="checkbox" onclick="togglePassword('id_password2')"> Mostrar contraseña
-      </div>
+  <!-- Campo nombre completo -->
+  <div class="form-group">
+    <label for="{{ form.nombre_completo.id_for_label }}">Nombre completo</label>
+    {{ form.nombre_completo }}
+  </div>
 
-      <button type="submit">Registrarme</button>
-    </form>
+  <!-- Campo correo -->
+  <div class="form-group">
+    <label for="{{ form.email.id_for_label }}">Correo electrónico</label>
+    {{ form.email }}
+  </div>
+
+  <!-- Campo username -->
+  <div class="form-group">
+    <label for="{{ form.username.id_for_label }}">Nombre de usuario</label>
+    {{ form.username }}
+  </div>
+
+  <!-- Campo contraseña -->
+  <div class="form-group">
+    <label for="{{ form.password1.id_for_label }}">Contraseña</label>
+    {{ form.password1 }}
+    <input type="checkbox" onclick="togglePassword('id_password1')"> Mostrar contraseña
+  </div>
+
+  <!-- Campo confirmar contraseña -->
+  <div class="form-group">
+    <label for="{{ form.password2.id_for_label }}">Confirmar contraseña</label>
+    {{ form.password2 }}
+    <input type="checkbox" onclick="togglePassword('id_password2')"> Mostrar contraseña
+  </div>
+
+  <!-- Campos ocultos -->
+  {{ form.rol.as_hidden }}
+  {{ form.estado.as_hidden }}
+
+  <button type="submit">Registrarme</button>
+</form>
+ñ
+
+
     <div class="login-link">
       ¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a>
     </div>
